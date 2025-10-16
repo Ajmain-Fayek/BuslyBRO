@@ -1,0 +1,27 @@
+{
+  "name": "buslybro",
+  "version": "1.0.0",
+  "description": "For our final year project at Anwer Khan Modern University, we are developing a comprehensive bus resevation system platform named BuslyBRO. This platform aims to streamline the process of booking bus tickets, making it easier and more convenient for users to plan their journeys. With features such as real-time seat availability, secure payment options, and user-friendly interfaces, BuslyBRO is set to revolutionize the way people book bus tickets. Our goal is to provide a seamless experience for travelers while also supporting bus operators in managing their services more efficiently.",
+  "main": "index.html",
+  "dependencies": {
+    "@dhiwise/component-tagger": "^1.0.10",
+    "@tailwindcss/forms": "^0.5.7",
+    "tailwindcss-animate": "^1.0.7",
+    "tailwindcss-elevation": "^2.0.0",
+    "tailwindcss-fluid-type": "^2.0.7"
+  },
+  "scripts": {
+    "build:css": "npx @dhiwise/component-tagger && npx tailwindcss -i ./css/input.css -o ./css/main.css",
+    "watch:css": "npx @dhiwise/component-tagger && npx tailwindcss -i ./css/input.css -o ./css/main.css --watch",
+    "dev": "npm run watch:css"
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@tailwindcss/aspect-ratio": "^0.4.2",
+    "@tailwindcss/container-queries": "^0.1.1",
+    "@tailwindcss/line-clamp": "^0.1.0",
+    "@tailwindcss/typography": "^0.5.16",
+    "tailwindcss": "^3.4.17"
+  }
+}

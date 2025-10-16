@@ -1,0 +1,1950 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Route Search & Booking - BuslyBRO | Find Your Perfect Journey</title>
+    <link rel="stylesheet" href="../css/main.css" />
+    <meta
+      name="description"
+      content="Search and book bus tickets across Bangladesh with BuslyBRO. Compare operators, select seats, and book with confidence using local payment methods."
+    />
+    <script
+      type="module"
+      src="https://static.rocket.new/rocket-web.js?_cfg=https%3A%2F%2Fbuslybro8859back.builtwithrocket.new&_be=https%3A%2F%2Fapplication.rocket.new&_v=0.1.8"
+    ></script>
+  </head>
+  <body class="bg-background font-inter">
+    <!-- Navigation Header -->
+    <nav class="bg-white shadow-subtle sticky top-0 z-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-16">
+          <!-- Logo -->
+          <div class="flex items-center">
+            <div class="flex-shrink-0">
+              <button>
+                <svg
+                  class="h-10 w-auto"
+                  viewBox="0 0 120 40"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <rect
+                    x="0"
+                    y="8"
+                    width="32"
+                    height="24"
+                    rx="4"
+                    fill="#006B5C"
+                  />
+                  <rect
+                    x="4"
+                    y="12"
+                    width="24"
+                    height="4"
+                    rx="2"
+                    fill="white"
+                  />
+                  <rect
+                    x="4"
+                    y="18"
+                    width="16"
+                    height="4"
+                    rx="2"
+                    fill="white"
+                  />
+                  <rect
+                    x="4"
+                    y="24"
+                    width="20"
+                    height="4"
+                    rx="2"
+                    fill="white"
+                  />
+                  <text
+                    x="40"
+                    y="20"
+                    font-family="Poppins"
+                    font-weight="700"
+                    font-size="16"
+                    fill="#006B5C"
+                  >
+                    BuslyBRO
+                  </text>
+                  <text
+                    x="40"
+                    y="32"
+                    font-family="Inter"
+                    font-size="10"
+                    fill="#5F6368"
+                  >
+                    Journey Companion
+                  </text>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- Desktop Navigation -->
+          <div class="hidden md:block">
+            <div class="ml-10 flex items-baseline space-x-8">
+              <a
+                href="homepage_bus_booking_platform.html"
+                class="text-text-secondary hover:text-primary px-3 py-2 rounded-md text-sm transition-smooth"
+                >Home</a
+              >
+              <a
+                href="route_search_booking_flow.html"
+                class="text-primary font-medium px-3 py-2 rounded-md text-sm bg-primary-50"
+                >Book Tickets</a
+              >
+              <a
+                href="destinations_cultural_guide.html"
+                class="text-text-secondary hover:text-primary px-3 py-2 rounded-md text-sm transition-smooth"
+                >Destinations</a
+              >
+              <a
+                href="my_journeys_dashboard.html"
+                class="text-text-secondary hover:text-primary px-3 py-2 rounded-md text-sm transition-smooth"
+                >My Journeys</a
+              >
+              <a
+                href="safety_trust_center.html"
+                class="text-text-secondary hover:text-primary px-3 py-2 rounded-md text-sm transition-smooth"
+                >Safety</a
+              >
+              <a
+                href="ai_travel_assistant_portal.html"
+                class="text-text-secondary hover:text-primary px-3 py-2 rounded-md text-sm transition-smooth"
+                >AI Assistant</a
+              >
+            </div>
+          </div>
+
+          <!-- Mobile menu button -->
+          <div class="md:hidden">
+            <button
+              type="button"
+              class="text-text-secondary hover:text-primary p-2"
+              onclick="toggleMobileMenu()"
+            >
+              <svg
+                class="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile Navigation Menu -->
+      <div
+        id="mobile-menu"
+        class="md:hidden hidden bg-white border-t border-border"
+      >
+        <div class="px-2 pt-2 pb-3 space-y-1">
+          <a
+            href="homepage_bus_booking_platform.html"
+            class="text-text-secondary hover:text-primary block px-3 py-2 rounded-md text-base"
+            >Home</a
+          >
+          <a
+            href="route_search_booking_flow.html"
+            class="text-primary font-medium block px-3 py-2 rounded-md text-base bg-primary-50"
+            >Book Tickets</a
+          >
+          <a
+            href="destinations_cultural_guide.html"
+            class="text-text-secondary hover:text-primary block px-3 py-2 rounded-md text-base"
+            >Destinations</a
+          >
+          <a
+            href="my_journeys_dashboard.html"
+            class="text-text-secondary hover:text-primary block px-3 py-2 rounded-md text-base"
+            >My Journeys</a
+          >
+          <a
+            href="safety_trust_center.html"
+            class="text-text-secondary hover:text-primary block px-3 py-2 rounded-md text-base"
+            >Safety</a
+          >
+          <a
+            href="ai_travel_assistant_portal.html"
+            class="text-text-secondary hover:text-primary block px-3 py-2 rounded-md text-base"
+            >AI Assistant</a
+          >
+        </div>
+      </div>
+    </nav>
+
+    <!-- Search Header -->
+    <section class="bg-gradient-to-br from-primary-800 to-primary-600 py-8">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="bg-white rounded-cultural-lg shadow-primary-lg p-6">
+          <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
+            <!-- From Location -->
+            <div class="relative">
+              <label class="block text-sm font-medium text-text-secondary mb-2"
+                >From</label
+              >
+              <select
+                id="location_from"
+                class="w-full px-4 py-3 border border-border rounded-cultural bg-white text-text-primary focus:ring-2 focus:ring-primary focus:border-transparent"
+              >
+                <option value="dhaka" selected>Dhaka</option>
+                <option value="chittagong">Chittagong</option>
+                <option value="sylhet">Sylhet</option>
+                <option value="rajshahi">Rajshahi</option>
+                <option value="khulna">Khulna</option>
+                <option value="barisal">Barisal</option>
+              </select>
+            </div>
+
+            <!-- To Location -->
+            <div class="relative">
+              <label class="block text-sm font-medium text-text-secondary mb-2"
+                >To</label
+              >
+              <select
+                id="location_to"
+                class="w-full px-4 py-3 border border-border rounded-cultural bg-white text-text-primary focus:ring-2 focus:ring-primary focus:border-transparent"
+              >
+                <option value="chittagong" selected>Chittagong</option>
+                <option value="dhaka">Dhaka</option>
+                <option value="sylhet">Sylhet</option>
+                <option value="coxs-bazar">Cox's Bazar</option>
+                <option value="rajshahi">Rajshahi</option>
+                <option value="khulna">Khulna</option>
+              </select>
+            </div>
+
+            <!-- Date -->
+            <div class="relative">
+              <label class="block text-sm font-medium text-text-secondary mb-2"
+                >Journey Date</label
+              >
+              <input
+                id="travel_date"
+                type="date"
+                class="w-full px-4 py-3 border border-border rounded-cultural bg-white text-text-primary focus:ring-2 focus:ring-primary focus:border-transparent"
+              />
+              <script>
+                const params = new URLSearchParams(window.location.search);
+                const date = params.get("date");
+
+                // Get today's date in YYYY-MM-DD format
+                const today = new Date().toISOString().split("T")[0];
+
+                // Set minimum date so past dates are disabled
+                const travelDateInput = document.getElementById("travel_date");
+                travelDateInput.setAttribute("min", today);
+
+                // Set value based on query param or today's date
+                if (date) {
+                  travelDateInput.value = date;
+                } else {
+                  travelDateInput.value = today;
+                }
+              </script>
+            </div>
+
+            <!-- Passengers -->
+            <div class="relative">
+              <label class="block text-sm font-medium text-text-secondary mb-2"
+                >Passengers</label
+              >
+              <select
+                id="passengers"
+                class="w-full px-4 py-3 border border-border rounded-cultural bg-white text-text-primary focus:ring-2 focus:ring-primary focus:border-transparent"
+              >
+                <option value="1" selected>1 Passenger</option>
+                <option value="2">2 Passengers</option>
+                <option value="3">3 Passengers</option>
+                <option value="4">4 Passengers</option>
+                <option value="5">5+ Passengers</option>
+              </select>
+            </div>
+
+            <!-- Search Button -->
+            <div class="flex items-end">
+              <button
+                id="bus_search_button"
+                class="w-full bg-secondary hover:bg-secondary-600 text-white font-semibold py-3 px-6 rounded-cultural transition-smooth"
+              >
+                <svg
+                  class="inline-block w-5 h-5 mr-2"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                  />
+                </svg>
+                Search
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main Content -->
+    <section class="py-8">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col lg:flex-row gap-8">
+          <!-- Filters Sidebar -->
+          <div class="lg:w-1/4">
+            <div
+              class="bg-white rounded-cultural-lg shadow-card p-6 sticky top-24"
+            >
+              <div class="flex items-center justify-between mb-6">
+                <h3
+                  class="text-lg font-poppins font-semibold text-text-primary"
+                >
+                  Filters
+                </h3>
+                <button
+                  class="text-primary text-sm font-medium hover:text-primary-700"
+                  onclick="resetFilters()"
+                >
+                  Reset
+                </button>
+              </div>
+
+              <!-- Departure Time -->
+              <div class="mb-6">
+                <h4 class="font-medium text-text-primary mb-3">
+                  Departure Time
+                </h4>
+                <div class="space-y-2">
+                  <label class="flex items-center">
+                    <input
+                      type="checkbox"
+                      class="rounded border-border text-primary focus:ring-primary"
+                      checked
+                    />
+                    <span class="ml-2 text-sm text-text-secondary"
+                      >Early Morning (6AM - 12PM)</span
+                    >
+                  </label>
+                  <label class="flex items-center">
+                    <input
+                      type="checkbox"
+                      class="rounded border-border text-primary focus:ring-primary"
+                      checked
+                    />
+                    <span class="ml-2 text-sm text-text-secondary"
+                      >Afternoon (12PM - 6PM)</span
+                    >
+                  </label>
+                  <label class="flex items-center">
+                    <input
+                      type="checkbox"
+                      class="rounded border-border text-primary focus:ring-primary"
+                      checked
+                    />
+                    <span class="ml-2 text-sm text-text-secondary"
+                      >Evening (6PM - 12AM)</span
+                    >
+                  </label>
+                  <label class="flex items-center">
+                    <input
+                      type="checkbox"
+                      class="rounded border-border text-primary focus:ring-primary"
+                      checked
+                    />
+                    <span class="ml-2 text-sm text-text-secondary"
+                      >Night (12AM - 6AM)</span
+                    >
+                  </label>
+                </div>
+              </div>
+
+              <!-- Price Range -->
+              <div class="mb-6">
+                <h4 class="font-medium text-text-primary mb-3">Price Range</h4>
+                <div class="space-y-2">
+                  <label class="flex items-center">
+                    <input
+                      type="checkbox"
+                      class="rounded border-border text-primary focus:ring-primary"
+                    />
+                    <span class="ml-2 text-sm text-text-secondary"
+                      >৳500 - ৳800</span
+                    >
+                  </label>
+                  <label class="flex items-center">
+                    <input
+                      type="checkbox"
+                      class="rounded border-border text-primary focus:ring-primary"
+                      checked
+                    />
+                    <span class="ml-2 text-sm text-text-secondary"
+                      >৳800 - ৳1200</span
+                    >
+                  </label>
+                  <label class="flex items-center">
+                    <input
+                      type="checkbox"
+                      class="rounded border-border text-primary focus:ring-primary"
+                      checked
+                    />
+                    <span class="ml-2 text-sm text-text-secondary"
+                      >৳1200 - ৳1800</span
+                    >
+                  </label>
+                  <label class="flex items-center">
+                    <input
+                      type="checkbox"
+                      class="rounded border-border text-primary focus:ring-primary"
+                    />
+                    <span class="ml-2 text-sm text-text-secondary">৳1800+</span>
+                  </label>
+                </div>
+              </div>
+
+              <!-- Bus Type -->
+              <div class="mb-6">
+                <h4 class="font-medium text-text-primary mb-3">Bus Type</h4>
+                <div class="space-y-2">
+                  <label class="flex items-center">
+                    <input
+                      type="checkbox"
+                      class="rounded border-border text-primary focus:ring-primary"
+                      checked
+                    />
+                    <span class="ml-2 text-sm text-text-secondary"
+                      >AC Business</span
+                    >
+                  </label>
+                  <label class="flex items-center">
+                    <input
+                      type="checkbox"
+                      class="rounded border-border text-primary focus:ring-primary"
+                      checked
+                    />
+                    <span class="ml-2 text-sm text-text-secondary"
+                      >AC Sleeper</span
+                    >
+                  </label>
+                  <label class="flex items-center">
+                    <input
+                      type="checkbox"
+                      class="rounded border-border text-primary focus:ring-primary"
+                    />
+                    <span class="ml-2 text-sm text-text-secondary">Non-AC</span>
+                  </label>
+                </div>
+              </div>
+
+              <!-- Amenities -->
+              <div class="mb-6">
+                <h4 class="font-medium text-text-primary mb-3">Amenities</h4>
+                <div class="space-y-2">
+                  <label class="flex items-center">
+                    <input
+                      type="checkbox"
+                      class="rounded border-border text-primary focus:ring-primary"
+                      checked
+                    />
+                    <span class="ml-2 text-sm text-text-secondary">WiFi</span>
+                  </label>
+                  <label class="flex items-center">
+                    <input
+                      type="checkbox"
+                      class="rounded border-border text-primary focus:ring-primary"
+                      checked
+                    />
+                    <span class="ml-2 text-sm text-text-secondary"
+                      >Charging Ports</span
+                    >
+                  </label>
+                  <label class="flex items-center">
+                    <input
+                      type="checkbox"
+                      class="rounded border-border text-primary focus:ring-primary"
+                    />
+                    <span class="ml-2 text-sm text-text-secondary"
+                      >Entertainment</span
+                    >
+                  </label>
+                  <label class="flex items-center">
+                    <input
+                      type="checkbox"
+                      class="rounded border-border text-primary focus:ring-primary"
+                    />
+                    <span class="ml-2 text-sm text-text-secondary"
+                      >Blanket</span
+                    >
+                  </label>
+                </div>
+              </div>
+
+              <!-- Operator Rating -->
+              <div>
+                <h4 class="font-medium text-text-primary mb-3">
+                  Operator Rating
+                </h4>
+                <div class="space-y-2">
+                  <label class="flex items-center">
+                    <input
+                      type="checkbox"
+                      class="rounded border-border text-primary focus:ring-primary"
+                      checked
+                    />
+                    <span class="ml-2 text-sm text-text-secondary"
+                      >4.5+ Stars</span
+                    >
+                  </label>
+                  <label class="flex items-center">
+                    <input
+                      type="checkbox"
+                      class="rounded border-border text-primary focus:ring-primary"
+                      checked
+                    />
+                    <span class="ml-2 text-sm text-text-secondary"
+                      >4.0+ Stars</span
+                    >
+                  </label>
+                  <label class="flex items-center">
+                    <input
+                      type="checkbox"
+                      class="rounded border-border text-primary focus:ring-primary"
+                    />
+                    <span class="ml-2 text-sm text-text-secondary"
+                      >3.5+ Stars</span
+                    >
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Search Results -->
+          <div class="lg:w-3/4">
+            <!-- Results Header -->
+            <div class="flex items-center justify-between mb-6">
+              <div>
+                <h2
+                  id="routeHeading"
+                  class="text-2xl font-poppins font-bold text-text-primary"
+                >
+                  Dhaka → Chittagong
+                </h2>
+                <p id="routeSubHeading" class="text-text-secondary">
+                  Tuesday, 21 January 2025 • 12 buses found
+                </p>
+              </div>
+              <div class="flex items-center space-x-4">
+                <span class="text-sm text-text-secondary">Sort by:</span>
+                <select
+                  class="px-3 py-2 border border-border rounded-cultural text-sm focus:ring-2 focus:ring-primary focus:border-transparent"
+                >
+                  <option value="departure">Departure Time</option>
+                  <option value="price">Price (Low to High)</option>
+                  <option value="duration">Journey Duration</option>
+                  <option value="rating">Operator Rating</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Bus Route Cards -->
+            <div id="busList" class="space-y-6"></div>
+
+            <!-- Load More -->
+            <!-- <div class="text-center mt-8">
+              <button
+                class="bg-primary hover:bg-primary-700 text-white px-8 py-3 rounded-cultural font-medium transition-smooth"
+              >
+                Load More Routes
+              </button>
+            </div> -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Seat Selection Modal -->
+    <div
+      id="seatModal"
+      class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden"
+    >
+      <div class="flex items-center justify-center min-h-screen p-4">
+        <div
+          class="bg-white rounded-cultural-lg max-w-4xl w-full max-h-screen overflow-y-auto"
+        >
+          <div class="p-6">
+            <div class="flex items-center justify-between mb-6">
+              <h3 class="text-xl font-poppins font-bold text-text-primary">
+                Select Your Seats
+              </h3>
+              <button
+                class="text-text-secondary hover:text-text-primary"
+                onclick="closeSeatModal()"
+              >
+                <svg
+                  class="w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </button>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              <!-- Seat Map -->
+              <div>
+                <div class="bg-surface rounded-cultural p-6">
+                  <div class="text-center mb-4">
+                    <h4 class="font-medium text-text-primary mb-2 busname">
+                      Green Line Paribahan - AC Sleeper
+                    </h4>
+                    <div class="text-sm text-text-secondary bus-type">
+                      Lower Deck
+                    </div>
+                  </div>
+
+                  <!-- Bus Layout -->
+                  <div class="bg-white rounded-cultural p-4">
+                    <!-- Driver Section -->
+                    <div class="flex justify-end mb-4">
+                      <div
+                        class="w-8 h-8 bg-gray-300 rounded-cultural flex items-center justify-center"
+                      >
+                        <svg
+                          class="w-4 h-4 text-gray-600"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                        >
+                          <path
+                            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                          />
+                        </svg>
+                      </div>
+                    </div>
+
+                    <!-- Seat Grid -->
+                    <div class="grid grid-cols-4 gap-2 mb-4 seat-grid">
+                      <!-- Row 1 -->
+                      <button
+                        class="seat-btn available w-8 h-12 bg-success-100 border-2 border-success-300 rounded text-xs font-medium text-success-700 hover:bg-success-200 transition-smooth"
+                        data-seat="A1"
+                      >
+                        A1
+                      </button>
+                      <button
+                        class="seat-btn available w-8 h-12 bg-success-100 border-2 border-success-300 rounded text-xs font-medium text-success-700 hover:bg-success-200 transition-smooth"
+                        data-seat="A2"
+                      >
+                        A2
+                      </button>
+                      <div class="w-8"></div>
+                      <button
+                        class="seat-btn available w-8 h-12 bg-success-100 border-2 border-success-300 rounded text-xs font-medium text-success-700 hover:bg-success-200 transition-smooth"
+                        data-seat="A3"
+                      >
+                        A3
+                      </button>
+
+                      <!-- Row 2 -->
+                      <button
+                        class="seat-btn occupied w-8 h-12 bg-gray-300 border-2 border-gray-400 rounded text-xs font-medium text-gray-600 cursor-not-allowed"
+                        data-seat="B1"
+                        disabled
+                      >
+                        B1
+                      </button>
+                      <button
+                        class="seat-btn available w-8 h-12 bg-success-100 border-2 border-success-300 rounded text-xs font-medium text-success-700 hover:bg-success-200 transition-smooth"
+                        data-seat="B2"
+                      >
+                        B2
+                      </button>
+                      <div class="w-8"></div>
+                      <button
+                        class="seat-btn available w-8 h-12 bg-success-100 border-2 border-success-300 rounded text-xs font-medium text-success-700 hover:bg-success-200 transition-smooth"
+                        data-seat="B3"
+                      >
+                        B3
+                      </button>
+
+                      <!-- Row 3 -->
+                      <button
+                        class="seat-btn available w-8 h-12 bg-success-100 border-2 border-success-300 rounded text-xs font-medium text-success-700 hover:bg-success-200 transition-smooth"
+                        data-seat="C1"
+                      >
+                        C1
+                      </button>
+                      <button
+                        class="seat-btn occupied w-8 h-12 bg-gray-300 border-2 border-gray-400 rounded text-xs font-medium text-gray-600 cursor-not-allowed"
+                        data-seat="C2"
+                        disabled
+                      >
+                        C2
+                      </button>
+                      <div class="w-8"></div>
+                      <button
+                        class="seat-btn available w-8 h-12 bg-success-100 border-2 border-success-300 rounded text-xs font-medium text-success-700 hover:bg-success-200 transition-smooth"
+                        data-seat="C3"
+                      >
+                        C3
+                      </button>
+
+                      <!-- Row 4 -->
+                      <button
+                        class="seat-btn available w-8 h-12 bg-success-100 border-2 border-success-300 rounded text-xs font-medium text-success-700 hover:bg-success-200 transition-smooth"
+                        data-seat="D1"
+                      >
+                        D1
+                      </button>
+                      <button
+                        class="seat-btn available w-8 h-12 bg-success-100 border-2 border-success-300 rounded text-xs font-medium text-success-700 hover:bg-success-200 transition-smooth"
+                        data-seat="D2"
+                      >
+                        D2
+                      </button>
+                      <div class="w-8"></div>
+                      <button
+                        class="seat-btn occupied w-8 h-12 bg-gray-300 border-2 border-gray-400 rounded text-xs font-medium text-gray-600 cursor-not-allowed"
+                        data-seat="D3"
+                        disabled
+                      >
+                        D3
+                      </button>
+                    </div>
+
+                    <!-- Legend -->
+                    <div class="flex justify-center space-x-4 text-xs">
+                      <div class="flex items-center">
+                        <div
+                          class="w-4 h-4 bg-success-100 border border-success-300 rounded mr-1"
+                        ></div>
+                        <span class="text-text-secondary">Available</span>
+                      </div>
+                      <div class="flex items-center">
+                        <div
+                          class="w-4 h-4 bg-secondary-100 border border-secondary-300 rounded mr-1"
+                        ></div>
+                        <span class="text-text-secondary">Selected</span>
+                      </div>
+                      <div class="flex items-center">
+                        <div
+                          class="w-4 h-4 bg-gray-300 border border-gray-400 rounded mr-1"
+                        ></div>
+                        <span class="text-text-secondary">Occupied</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Booking Summary -->
+              <div>
+                <div class="bg-surface rounded-cultural p-6">
+                  <h4 class="font-medium text-text-primary mb-4">
+                    Booking Summary
+                  </h4>
+
+                  <div class="space-y-3 mb-6">
+                    <div class="flex justify-between">
+                      <span class="text-text-secondary">Route:</span>
+                      <span class="text-text-primary font-medium bus-route"
+                        >Dhaka → Chittagong</span
+                      >
+                    </div>
+                    <div class="flex justify-between">
+                      <span class="text-text-secondary">Date:</span>
+                      <span class="text-text-primary font-medium bus-departure"
+                        >21 Jan 2025</span
+                      >
+                    </div>
+
+                    <div class="flex justify-between">
+                      <span class="text-text-secondary">Selected Seats:</span>
+                      <span
+                        class="text-text-primary font-medium"
+                        id="selectedSeats"
+                        >None</span
+                      >
+                    </div>
+                  </div>
+
+                  <div class="border-t border-border pt-4 mb-6">
+                    <div class="flex justify-between text-lg font-semibold">
+                      <span class="text-text-primary">Total Amount:</span>
+                      <span class="text-text-primary" id="totalAmount">৳0</span>
+                    </div>
+                  </div>
+
+                  <button
+                    class="w-full bg-secondary hover:bg-secondary-600 text-white py-3 rounded-cultural font-medium transition-smooth"
+                    onclick="proceedToPayment()"
+                    id="proceedBtn"
+                    disabled
+                  >
+                    Proceed to Payment
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Payment Modal -->
+    <div
+      id="paymentModal"
+      class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden"
+    >
+      <div class="flex items-center justify-center min-h-screen p-4">
+        <div
+          class="bg-white rounded-cultural-lg max-w-2xl w-full max-h-screen overflow-y-auto"
+        >
+          <div class="p-6">
+            <div class="flex items-center justify-between mb-6">
+              <h3 class="text-xl font-poppins font-bold text-text-primary">
+                Payment Details
+              </h3>
+              <button
+                class="text-text-secondary hover:text-text-primary"
+                onclick="closePaymentModal()"
+              >
+                <svg
+                  class="w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </button>
+            </div>
+
+            <!-- Payment Methods -->
+            <div class="mb-6">
+              <h4 class="font-medium text-text-primary mb-4">
+                Select Payment Method
+              </h4>
+              <div class="grid grid-cols-2 gap-4">
+                <label
+                  class="payment-method border-2 border-border rounded-cultural p-4 cursor-pointer hover:border-primary transition-smooth"
+                >
+                  <input
+                    type="radio"
+                    name="payment"
+                    value="bkash"
+                    class="sr-only"
+                  />
+                  <div class="text-center">
+                    <div
+                      class="w-12 h-12 bg-pink-100 rounded-cultural mx-auto mb-2 flex items-center justify-center"
+                    >
+                      <span class="text-pink-600 font-bold text-sm">bKash</span>
+                    </div>
+                    <div class="text-sm font-medium text-text-primary">
+                      bKash
+                    </div>
+                  </div>
+                </label>
+                <label
+                  class="payment-method border-2 border-border rounded-cultural p-4 cursor-pointer hover:border-primary transition-smooth"
+                >
+                  <input
+                    type="radio"
+                    name="payment"
+                    value="nagad"
+                    class="sr-only"
+                  />
+                  <div class="text-center">
+                    <div
+                      class="w-12 h-12 bg-orange-100 rounded-cultural mx-auto mb-2 flex items-center justify-center"
+                    >
+                      <span class="text-orange-600 font-bold text-sm"
+                        >Nagad</span
+                      >
+                    </div>
+                    <div class="text-sm font-medium text-text-primary">
+                      Nagad
+                    </div>
+                  </div>
+                </label>
+                <label
+                  class="payment-method border-2 border-border rounded-cultural p-4 cursor-pointer hover:border-primary transition-smooth"
+                >
+                  <input
+                    type="radio"
+                    name="payment"
+                    value="rocket"
+                    class="sr-only"
+                  />
+                  <div class="text-center">
+                    <div
+                      class="w-12 h-12 bg-purple-100 rounded-cultural mx-auto mb-2 flex items-center justify-center"
+                    >
+                      <span class="text-purple-600 font-bold text-sm"
+                        >Rocket</span
+                      >
+                    </div>
+                    <div class="text-sm font-medium text-text-primary">
+                      Rocket
+                    </div>
+                  </div>
+                </label>
+                <label
+                  class="payment-method border-2 border-border rounded-cultural p-4 cursor-pointer hover:border-primary transition-smooth"
+                >
+                  <input
+                    type="radio"
+                    name="payment"
+                    value="card"
+                    class="sr-only"
+                  />
+                  <div class="text-center">
+                    <div
+                      class="w-12 h-12 bg-blue-100 rounded-cultural mx-auto mb-2 flex items-center justify-center"
+                    >
+                      <svg
+                        class="w-6 h-6 text-blue-600"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                      >
+                        <path
+                          d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4zM18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zM4 13a1 1 0 011-1h1a1 1 0 110 2H5a1 1 0 01-1-1zm5-1a1 1 0 100 2h1a1 1 0 100-2H9z"
+                        />
+                      </svg>
+                    </div>
+                    <div class="text-sm font-medium text-text-primary">
+                      Credit Card
+                    </div>
+                  </div>
+                </label>
+              </div>
+            </div>
+
+            <!-- Payment Form -->
+            <div class="mb-6">
+              <div class="space-y-4">
+                <div>
+                  <label
+                    class="block text-sm font-medium text-text-secondary mb-2"
+                    >Mobile Number</label
+                  >
+                  <input
+                    type="tel"
+                    class="w-full px-4 py-3 border border-border rounded-cultural focus:ring-2 focus:ring-primary focus:border-transparent"
+                    placeholder="01XXXXXXXXX"
+                  />
+                </div>
+                <div>
+                  <label
+                    class="block text-sm font-medium text-text-secondary mb-2"
+                    >Passenger Name</label
+                  >
+                  <input
+                    type="text"
+                    class="w-full px-4 py-3 border border-border rounded-cultural focus:ring-2 focus:ring-primary focus:border-transparent"
+                    placeholder="Enter full name"
+                  />
+                </div>
+                <div>
+                  <label
+                    class="block text-sm font-medium text-text-secondary mb-2"
+                    >Email (Optional)</label
+                  >
+                  <input
+                    type="email"
+                    class="w-full px-4 py-3 border border-border rounded-cultural focus:ring-2 focus:ring-primary focus:border-transparent"
+                    placeholder="your@email.com"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <!-- Final Summary -->
+            <div class="bg-surface rounded-cultural p-4 mb-6">
+              <div class="flex justify-between items-center">
+                <span class="text-lg font-semibold text-text-primary"
+                  >Total Amount:</span
+                >
+                <span class="text-2xl font-bold text-primary"
+                  >৳ <span id="total-to-pay" class="total-to-pay"></span
+                ></span>
+              </div>
+            </div>
+
+            <button
+              class="w-full bg-primary hover:bg-primary-700 text-white py-3 rounded-cultural font-medium transition-smooth"
+              onclick="completePayment()"
+            >
+              Complete Payment
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Journey Details Modal -->
+    <div
+      id="journeyDetailsModal"
+      class="fixed inset-0 z-50 hidden items-center justify-center bg-black/50 backdrop-blur-sm"
+    >
+      <div class="flex items-center justify-center min-h-screen">
+        <div
+          class="bg-white rounded-cultural-lg max-w-2xl w-full max-h-screen overflow-y-auto border shadow-2xl overflow-hidden transform transition-all animate-fadeIn mx-auto mt-10 p-4"
+        >
+          <!-- Header -->
+          <div
+            class="flex justify-between items-center border-b border-gray-100 p-5"
+          >
+            <h2 class="text-lg font-semibold text-gray-900">Journey Details</h2>
+            <button
+              onclick="closeJourneyDetails()"
+              class="text-gray-400 hover:text-gray-600 transition"
+            >
+              ✕
+            </button>
+          </div>
+
+          <!-- Modal Content -->
+          <div
+            id="journeyDetailsContent"
+            class="p-6 max-h-[75vh] overflow-y-auto"
+          >
+            <p class="text-center text-gray-500">Loading journey details...</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- AI Assistant Chat Bubble -->
+    <div class="fixed bottom-6 right-6 z-50">
+      <button
+        class="bg-secondary hover:bg-secondary-600 text-white p-4 rounded-full shadow-primary-lg transition-smooth"
+        onclick="openAIAssistant()"
+      >
+        <svg
+          class="w-6 h-6"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
+          />
+        </svg>
+      </button>
+      <div
+        class="absolute bottom-16 right-0 bg-white rounded-cultural shadow-primary-lg p-3 w-48 hidden"
+        id="ai-tooltip"
+      >
+        <p class="text-sm text-text-primary font-medium">Need help booking?</p>
+        <p class="text-xs text-text-secondary">বুকিংয়ে সাহায্য চান?</p>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-text-primary text-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+          <!-- Company Info -->
+          <div class="col-span-1 md:col-span-2">
+            <div class="flex items-center mb-4">
+              <svg
+                class="h-8 w-auto mr-3"
+                viewBox="0 0 120 40"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <rect x="0" y="8" width="32" height="24" rx="4" fill="white" />
+                <rect
+                  x="4"
+                  y="12"
+                  width="24"
+                  height="4"
+                  rx="2"
+                  fill="#006B5C"
+                />
+                <rect
+                  x="4"
+                  y="18"
+                  width="16"
+                  height="4"
+                  rx="2"
+                  fill="#006B5C"
+                />
+                <rect
+                  x="4"
+                  y="24"
+                  width="20"
+                  height="4"
+                  rx="2"
+                  fill="#006B5C"
+                />
+                <text
+                  x="40"
+                  y="20"
+                  font-family="Poppins"
+                  font-weight="700"
+                  font-size="16"
+                  fill="white"
+                >
+                  BuslyBRO
+                </text>
+                <text
+                  x="40"
+                  y="32"
+                  font-family="Inter"
+                  font-size="10"
+                  fill="#B3E5DF"
+                >
+                  Journey Companion
+                </text>
+              </svg>
+            </div>
+            <p class="text-gray-300 mb-4 max-w-md">
+              Your trusted journey companion for premium bus booking across
+              Bangladesh. Discover destinations with confidence and travel with
+              peace of mind.
+            </p>
+            <div class="flex space-x-4">
+              <a
+                href="javascript:void(0)"
+                class="text-gray-300 hover:text-white transition-smooth"
+              >
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path
+                    d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"
+                  />
+                </svg>
+              </a>
+              <a
+                href="javascript:void(0)"
+                class="text-gray-300 hover:text-white transition-smooth"
+              >
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path
+                    d="M22.46 6c-.77.35-1.6.58-2.46.69.88-.53 1.56-1.37 1.88-2.38-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29 0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15 0 1.49.75 2.81 1.91 3.56-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07 4.28 4.28 0 0 0 4 2.98 8.521 8.521 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21 16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56.84-.6 1.56-1.36 2.14-2.23z"
+                  />
+                </svg>
+              </a>
+              <a
+                href="javascript:void(0)"
+                class="text-gray-300 hover:text-white transition-smooth"
+              >
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path
+                    d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.174-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.402.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.357-.629-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24.009 12.017 24.009c6.624 0 11.99-5.367 11.99-11.988C24.007 5.367 18.641.001.012.001z.017-.001z"
+                  />
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <!-- Quick Links -->
+          <div>
+            <h3 class="text-lg font-poppins font-semibold mb-4">Quick Links</h3>
+            <ul class="space-y-2">
+              <li>
+                <a
+                  href="route_search_booking_flow.html"
+                  class="text-gray-300 hover:text-white transition-smooth"
+                  >Book Tickets</a
+                >
+              </li>
+              <li>
+                <a
+                  href="destinations_cultural_guide.html"
+                  class="text-gray-300 hover:text-white transition-smooth"
+                  >Destinations</a
+                >
+              </li>
+              <li>
+                <a
+                  href="my_journeys_dashboard.html"
+                  class="text-gray-300 hover:text-white transition-smooth"
+                  >My Journeys</a
+                >
+              </li>
+              <li>
+                <a
+                  href="safety_trust_center.html"
+                  class="text-gray-300 hover:text-white transition-smooth"
+                  >Safety Center</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <!-- Support -->
+          <div>
+            <h3 class="text-lg font-poppins font-semibold mb-4">Support</h3>
+            <ul class="space-y-2">
+              <li>
+                <a
+                  href="ai_travel_assistant_portal.html"
+                  class="text-gray-300 hover:text-white transition-smooth"
+                  >AI Assistant</a
+                >
+              </li>
+              <li>
+                <a
+                  href="javascript:void(0)"
+                  class="text-gray-300 hover:text-white transition-smooth"
+                  >Help Center</a
+                >
+              </li>
+              <li>
+                <a
+                  href="javascript:void(0)"
+                  class="text-gray-300 hover:text-white transition-smooth"
+                  >Contact Us</a
+                >
+              </li>
+              <li>
+                <a
+                  href="javascript:void(0)"
+                  class="text-gray-300 hover:text-white transition-smooth"
+                  >Terms & Conditions</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="border-t border-gray-700 mt-8 pt-8 text-center">
+          <p class="text-gray-300">
+            © 2025 BuslyBRO. All Rights Reserved. | Made with ❤️ for Bangladesh
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <script type="module">
+      import { isLoggedIn, getCurrentUser, logout } from "../public/js/auth.js";
+      let selectedSeats = [];
+      let seatPrice = 0; // will be set dynamically based on bus fare
+      let busID = 0;
+
+      // Open seat modal dynamically for a bus
+      async function selectSeats(busId) {
+        busID = busId;
+        if (!isLoggedIn()) {
+          window.location.href = "login.html";
+          return;
+        }
+        const seatModal = document.getElementById("seatModal");
+        seatModal.classList.remove("hidden");
+        document.body.style.overflow = "hidden";
+
+        selectedSeats = []; // reset selection
+        document.getElementById("selectedSeats").textContent = "None";
+        document.getElementById("totalAmount").textContent = "৳0";
+        const proceedBtn = document.getElementById("proceedBtn");
+        proceedBtn.disabled = true;
+        proceedBtn.classList.add("opacity-50", "cursor-not-allowed");
+
+        try {
+          // Fetch bus data from API
+          const res = await fetch(
+            `http://localhost/BuslyBRO/backend/api/get_bus_seats.php?bus_id=${busId}`
+          );
+          const data = await res.json();
+          const { bus, reserved_seats } = data;
+          console.log(bus);
+
+          seatPrice = Number(bus.fare); // dynamic fare
+
+          // Update modal header and info
+          seatModal.querySelector(
+            ".busname"
+          ).textContent = `${bus.bus_name} - `;
+          seatModal.querySelector(".bus-type").textContent = `${bus.bus_type}`;
+          seatModal.querySelector(
+            ".bus-route"
+          ).textContent = `${bus.route_from} → ${bus.route_to}`;
+          seatModal.querySelector(
+            ".bus-departure"
+          ).textContent = `${bus.departure_datetime}`;
+
+          const seatGrid = seatModal.querySelector(".seat-grid");
+          seatGrid.innerHTML = ""; // clear previous seats
+
+          // Generate seat buttons dynamically (4 seats per row)
+          const rows = Math.ceil(bus.total_seats / 4);
+          let seatLetter = "A".charCodeAt(0);
+
+          for (let r = 1; r <= rows; r++) {
+            for (let c = 1; c <= 4; c++) {
+              const seatNumber = String.fromCharCode(seatLetter) + c;
+
+              if ((r - 1) * 4 + c > bus.total_seats) continue; // stop if exceeds total seats
+
+              const btn = document.createElement("button");
+              btn.textContent = seatNumber;
+              btn.className =
+                "seat-btn w-8 h-12 border-2 rounded text-xs font-medium transition-smooth";
+
+              if (reserved_seats.includes(seatNumber)) {
+                btn.classList.add(
+                  "occupied",
+                  "bg-gray-300",
+                  "border-gray-400",
+                  "text-gray-600",
+                  "cursor-not-allowed"
+                );
+                btn.disabled = true;
+              } else {
+                btn.classList.add(
+                  "available",
+                  "bg-success-100",
+                  "border-success-300",
+                  "text-success-700",
+                  "hover:bg-success-200"
+                );
+                btn.dataset.seat = seatNumber;
+                btn.addEventListener("click", () =>
+                  toggleSeatSelection(btn, seatNumber)
+                );
+              }
+
+              seatGrid.appendChild(btn);
+            }
+            seatLetter++;
+          }
+        } catch (error) {
+          alert("Failed to load bus seats. Please try again.");
+          console.error(error);
+          closeSeatModal();
+        }
+      }
+
+      // Toggle seat selection
+      function toggleSeatSelection(btn, seatNumber) {
+        const selectedSeatsElement = document.getElementById("selectedSeats");
+        const totalAmountElement = document.getElementById("totalAmount");
+        const proceedBtn = document.getElementById("proceedBtn");
+
+        if (selectedSeats.includes(seatNumber)) {
+          // Deselect
+          selectedSeats = selectedSeats.filter((s) => s !== seatNumber);
+          btn.classList.remove(
+            "bg-secondary-100",
+            "border-secondary-300",
+            "text-secondary-700"
+          );
+          btn.classList.add(
+            "bg-success-100",
+            "border-success-300",
+            "text-success-700"
+          );
+        } else {
+          // Select
+          selectedSeats.push(seatNumber);
+          btn.classList.remove(
+            "bg-success-100",
+            "border-success-300",
+            "text-success-700"
+          );
+          btn.classList.add(
+            "bg-secondary-100",
+            "border-secondary-300",
+            "text-secondary-700"
+          );
+        }
+
+        // Update summary UI
+        selectedSeatsElement.textContent = selectedSeats.length
+          ? selectedSeats.join(", ")
+          : "None";
+        totalAmountElement.textContent = `৳${selectedSeats.length * seatPrice}`;
+        // update price
+        proceedBtn.disabled = selectedSeats.length === 0;
+        proceedBtn.classList.toggle("opacity-50", selectedSeats.length === 0);
+        proceedBtn.classList.toggle(
+          "cursor-not-allowed",
+          selectedSeats.length === 0
+        );
+      }
+
+      // Close seat modal
+      function closeSeatModal() {
+        document.getElementById("seatModal").classList.add("hidden");
+        document.body.style.overflow = "auto";
+      }
+
+      // Proceed to payment
+      function proceedToPayment() {
+        if (!selectedSeats.length) return;
+        closeSeatModal();
+        document.getElementById("paymentModal").classList.remove("hidden");
+        document.getElementById("total-to-pay").textContent = `${
+          seatPrice * selectedSeats.length
+        }`;
+      }
+
+      // Proceed to payment
+      async function completePayment() {
+        if (!selectedSeats.length) return;
+
+        const user = getCurrentUser(); // Make sure your auth.js provides this
+        if (!user) {
+          alert("You must be logged in to complete payment.");
+          return;
+        }
+
+        console.log({
+          user_id: user.id,
+          bus_id: busID,
+          seats: selectedSeats,
+        });
+
+        try {
+          const response = await fetch(
+            "http://localhost/BuslyBRO/backend/api/reservations_create.php",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                user_id: user.id,
+                bus_id: busID,
+                seats: selectedSeats,
+              }),
+            }
+          );
+
+          const result = await response.json();
+
+          console.log(response);
+
+          if (response.ok && result.success) {
+            alert(
+              result.message || "Payment successful! Reservation confirmed."
+            );
+            selectedSeats = []; // clear selection
+            closeSeatModal();
+            document.getElementById("paymentModal").classList.add("hidden");
+            // Optionally refresh seat map if modal reopened
+            window.location.href = "my_journeys_dashboard.html";
+          } else {
+            alert(result.message || "Payment failed. Please try again.");
+          }
+        } catch (error) {
+          console.error("Reservation error:", error);
+          alert("Payment failed: Unable to reach the server.");
+        }
+      }
+
+      // close payment modal
+      function closePaymentModal() {
+        closeSeatModal();
+        document.getElementById("paymentModal").classList.add("hidden");
+      }
+
+      // Search buses
+      document
+        .getElementById("bus_search_button")
+        .addEventListener("click", (e) => {
+          e.preventDefault();
+          // Get inputs
+          const from = document
+            .getElementById("location_from")
+            .value.trim()
+            .toLowerCase();
+          const to = document
+            .getElementById("location_to")
+            .value.trim()
+            .toLowerCase();
+          const date = document
+            .getElementById("travel_date")
+            .value.trim()
+            .toLowerCase();
+          const people = document.getElementById("passengers").value;
+
+          if (!from || !to || !date) {
+            alert("Please select destinations and date!");
+            return;
+          }
+
+          console.log(from, to, date, people);
+
+          // Redirect to buses.html
+          window.location.href = `./route_search_booking_flow.html?from=${from}&to=${to}&date=${date}&people=${people}`;
+        });
+
+      // Make Functions Global
+      window.selectSeats = selectSeats;
+      window.closeSeatModal = closeSeatModal;
+      window.proceedToPayment = proceedToPayment;
+      window.closePaymentModal = closePaymentModal;
+      window.completePayment = completePayment;
+    </script>
+
+    <!-- Fetch and load buses -->
+    <script>
+      let buses = [];
+      async function loadBuses() {
+        const params = new URLSearchParams(window.location.search);
+        const from = params.get("from");
+        const to = params.get("to");
+        const date = params.get("date");
+        const people = params.get("people");
+
+        // Get headings
+        const routeHeading = document.getElementById("routeHeading");
+        const subHeading = document.getElementById("routeSubHeading");
+
+        if (!from || !to) {
+          // Fetch from your PHP API
+          const res = await fetch(
+            `http://localhost/BuslyBRO/backend/api/buses_list.php`
+          );
+          const result = await res.json();
+
+          buses = result.buses || [];
+          // console.log(buses);
+
+          // Update dynamic heading
+          routeHeading.textContent =
+            from && to ? `${from} → ${to}` : "All Routes";
+          subHeading.textContent = "";
+        }
+
+        if (from && to) {
+          // Fetch from your PHP API
+          const res = await fetch(
+            `http://localhost/BuslyBRO/backend/api/buses_list.php?from=${from}&to=${to}&date=${date}`
+          );
+          const result = await res.json();
+
+          buses = result.buses || [];
+          // console.log(buses);
+
+          // Update dynamic heading
+          const displayFrom = from || "All Routes";
+          const displayTo = to || "";
+          const currentDate = date;
+
+          routeHeading.textContent = displayTo
+            ? `${displayFrom} → ${displayTo}`
+            : displayFrom;
+
+          subHeading.textContent = `${currentDate} • ${buses.length} bus${
+            buses.length > 1 ? "es" : ""
+          } found`;
+        }
+
+        const container = document.getElementById("busList");
+
+        if (buses.length === 0) {
+          container.innerHTML = "<p>No buses found for this route.</p>";
+          return;
+        }
+        // Helper functions
+        function formatTime(dateTimeStr) {
+          const d = new Date(dateTimeStr);
+          const hours = d.getHours() % 12 || 12;
+          const minutes = d.getMinutes().toString().padStart(2, "0");
+          const ampm = d.getHours() >= 12 ? "PM" : "AM";
+          return `${hours}:${minutes} ${ampm}`;
+        }
+
+        function calculateDuration(startStr, endStr) {
+          const start = new Date(startStr);
+          const end = new Date(endStr);
+          const diffMs = end - start;
+          const hours = Math.floor(diffMs / (1000 * 60 * 60));
+          const minutes = Math.floor((diffMs / (1000 * 60)) % 60);
+          return `${hours}h ${minutes}m`;
+        }
+
+        container.innerHTML = buses
+          .map(
+            (bus, idx) => `
+            <!-- Route Card ${idx + 1} -->
+              <div
+                class="bg-white rounded-cultural-lg shadow-card p-6 hover:shadow-primary-lg transition-smooth"
+              >
+                <div
+                  class="flex flex-col lg:flex-row lg:items-center justify-between"
+                >
+                  <div class="flex-1">
+                    <div class="flex items-center justify-between mb-4">
+                      <div class="flex items-center">
+                        <div class="bg-primary-50 p-2 rounded-cultural mr-3">
+                          <svg
+                            class="w-6 h-6 text-primary"
+                            fill="currentColor"
+                            viewBox="0 0 20 20"
+                          >
+                            <path
+                              d="M8 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM15 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z"
+                            />
+                            <path
+                              d="M3 4a1 1 0 00-1 1v10a1 1 0 001 1h1.05a2.5 2.5 0 014.9 0H10a1 1 0 001-1V5a1 1 0 00-1-1H3zM14 7a1 1 0 00-1 1v6.05A2.5 2.5 0 0115.95 16H17a1 1 0 001-1V8a1 1 0 00-1-1h-3z"
+                            />
+                          </svg>
+                        </div>
+                        <div>
+                          <h3
+                            class="text-lg font-poppins font-semibold text-text-primary"
+                          >
+                            ${bus.bus_name} (${bus.bus_number})
+                          </h3>
+                          <div class="flex items-center">
+                            <div class="flex items-center mr-3">
+                              <svg
+                                class="w-4 h-4 text-accent mr-1"
+                                fill="currentColor"
+                                viewBox="0 0 20 20"
+                              >
+                                <path
+                                  d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                                />
+                              </svg>
+                              <span class="text-sm text-text-secondary"
+                                >4.8 (2,341 reviews)</span
+                              >
+                            </div>
+                            <span
+                              class="bg-success-100 text-success-700 px-2 py-1 rounded-full text-xs font-medium"
+                              >Verified</span
+                            >
+                          </div>
+                        </div>
+                      </div>
+                      <div class="text-right">
+                        <div
+                          class="text-2xl font-poppins font-bold text-text-primary"
+                        >
+                          ${bus.fare}
+                        </div>
+                        <div class="text-sm text-text-secondary">per seat</div>
+                      </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                      <!-- Journey Details -->
+                      <div class="flex items-center">
+                        <div class="text-center">
+                          <div class="text-lg font-semibold text-text-primary">
+                            ${formatTime(bus.departure_datetime)}
+                          </div>
+                          <div class="text-sm text-text-secondary">Dhaka</div>
+                        </div>
+                        <div class="flex-1 mx-4">
+                          <div class="flex items-center">
+                            <div class="w-2 h-2 bg-primary rounded-full"></div>
+                            <div class="flex-1 h-px bg-border mx-2"></div>
+                            <div
+                              class="text-xs text-text-secondary bg-surface px-2 py-1 rounded"
+                            >
+                              ${calculateDuration(
+                                bus.departure_datetime,
+                                bus.arrival_datetime
+                              )}
+                            </div>
+                            <div class="flex-1 h-px bg-border mx-2"></div>
+                            <div
+                              class="w-2 h-2 bg-secondary rounded-full"
+                            ></div>
+                          </div>
+                        </div>
+                        <div class="text-center">
+                          <div class="text-lg font-semibold text-text-primary">
+                            ${formatTime(bus.arrival_datetime)}
+                          </div>
+                          <div class="text-sm text-text-secondary">
+                           ${bus.route_to}
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- Bus Type & Amenities -->
+                      <div class="flex flex-col">
+                        <div class="text-sm font-medium text-text-primary mb-2">
+                        ${bus.bus_type}
+                        </div>
+                    ${
+                      bus.bus_type === "AC" || bus.bus_type === "Sleeper"
+                        ? `
+                            <div class="flex flex-wrap gap-2">
+                              <span
+                                class="bg-primary-50 text-primary px-2 py-1 rounded text-xs"
+                                >WiFi</span
+                              >
+                              <span
+                                class="bg-primary-50 text-primary px-2 py-1 rounded text-xs"
+                                >Charging</span
+                              >
+                              <span
+                                class="bg-primary-50 text-primary px-2 py-1 rounded text-xs"
+                                >Blanket</span
+                              >
+                            </div>
+                    `
+                        : ""
+                    }
+                    </div>
+
+                      <!-- Seat Availability -->
+                      <div class="text-center">
+                        <div class="text-lg font-semibold text-success">
+                          ${bus.available_seats} seats left
+                        </div>
+                        <div class="text-sm text-text-secondary">out of ${
+                          bus.total_seats
+                        }</div>
+                      </div>
+                    </div>
+
+                    <div class="flex items-center justify-between">
+                      <div class="flex items-center space-x-4">
+                        <button
+                          class="text-primary text-sm font-medium hover:text-primary-700"
+                          onclick="viewJourneyDetails(${idx})"
+                        >
+                          <svg
+                            class="inline-block w-4 h-4 mr-1"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="2"
+                              d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                            />
+                          </svg>
+                          Journey Details
+                        </button>
+                        <button
+                          class="text-primary text-sm font-medium hover:text-primary-700"
+                           onclick="showReviews('route${idx}')"
+                        >
+                          <svg
+                            class="inline-block w-4 h-4 mr-1"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="2"
+                              d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
+                            />
+                          </svg>
+                          Reviews
+                        </button>
+                      </div>
+                      <button
+                        class="bg-secondary hover:bg-secondary-600 text-white px-6 py-2 rounded-cultural font-medium transition-smooth"
+                        onclick="selectSeats(${bus.bus_id})"
+                      >
+                        Select Seats
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+                            `
+          )
+          .join("");
+      }
+
+      loadBuses();
+
+      // View journey details
+      async function viewJourneyDetails(idx) {
+        const modal = document.getElementById("journeyDetailsModal");
+        const content = document.getElementById("journeyDetailsContent");
+
+        modal.classList.remove("hidden");
+        document.body.style.overflow = "hidden";
+        content.innerHTML = `<p class="text-center text-gray-500 py-6">Loading...</p>`;
+
+        try {
+          const bus = buses[idx];
+
+          if (!bus) {
+            content.innerHTML = `<p class="text-center text-red-500 py-6">Journey details not found.</p>`;
+            return;
+          }
+
+          const depTime = new Date(bus.departure_datetime).toLocaleString();
+          const arrTime = new Date(bus.arrival_datetime).toLocaleString();
+
+          content.innerHTML = `
+      <div class="space-y-6 text-gray-800">
+        <!-- Route Info -->
+        <div class="text-center">
+          <h3 class="text-2xl font-semibold capitalize text-gray-900">
+            ${bus.route_from} → ${bus.route_to}
+          </h3>
+          <p class="text-gray-500 mt-1">${bus.bus_name} • ${bus.bus_type}</p>
+        </div>
+
+        <!-- Journey Timings -->
+        <div class="grid grid-cols-2 gap-4 border border-gray-100 rounded-xl p-4 bg-gray-50">
+          <div>
+            <p class="text-sm text-gray-500">Departure</p>
+            <p class="font-medium">${depTime}</p>
+          </div>
+          <div>
+            <p class="text-sm text-gray-500">Arrival</p>
+            <p class="font-medium">${arrTime}</p>
+          </div>
+        </div>
+
+        <!-- Fare and Seats -->
+        <div class="grid grid-cols-2 gap-4 border border-gray-100 rounded-xl p-4 bg-gray-50">
+          <div>
+            <p class="text-sm text-gray-500">Fare</p>
+            <p class="font-semibold text-blue-700">৳${bus.fare}</p>
+          </div>
+          <div>
+            <p class="text-sm text-gray-500">Seats Available</p>
+            <p class="font-semibold">${bus.available_seats} / ${
+            bus.total_seats
+          }</p>
+          </div>
+        </div>
+
+        <!-- Stops -->
+        <div class="border border-gray-100 rounded-xl p-4 bg-gray-50">
+          <p class="text-sm text-gray-500 mb-2">Stops</p>
+          <div class="flex flex-wrap gap-2">
+            ${bus.stops
+              .map(
+                (stop, i) => `
+                <span class="bg-blue-50 text-blue-700 px-3 py-1 rounded-full text-sm font-medium">
+                  ${i + 1}. ${stop}
+                </span>`
+              )
+              .join("")}
+          </div>
+        </div>
+      </div>
+    `;
+        } catch (error) {
+          console.error("Error fetching details:", error);
+          content.innerHTML = `<p class="text-center text-red-500 py-6">Failed to load details.</p>`;
+        }
+      }
+
+      function closeJourneyDetails() {
+        const modal = document.getElementById("journeyDetailsModal");
+        modal.classList.add("hidden");
+        document.body.style.overflow = "auto";
+      }
+    </script>
+    <style>
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .animate-fadeIn {
+        animation: fadeIn 0.3s ease-out;
+      }
+    </style>
+
+    <script
+      id="dhws-dataInjector"
+      src="../public/dhws-data-injector.js"
+    ></script>
+
+    <script>
+      // Load routes
+      async function loadRoutes1() {
+        const fromSelect = document.getElementById("location_from");
+        const toSelect = document.getElementById("location_to");
+
+        // Clear existing options first
+        fromSelect.innerHTML =
+          '<option value="" selected disabled>Select departure city</option>';
+        toSelect.innerHTML =
+          '<option value="" selected disabled>Select destination</option>';
+
+        try {
+          const res = await fetch(
+            "http://localhost/BuslyBRO/backend/api/routes_list.php"
+          );
+          const data = await res.json();
+
+          if (data.success && Array.isArray(data.routes)) {
+            // Get unique city names
+            const fromCities = new Set();
+            const toCities = new Set();
+
+            data.routes.forEach((route) => {
+              fromCities.add(route.route_from);
+              toCities.add(route.route_to);
+            });
+
+            // Populate "From" cities
+            fromCities.forEach((city) => {
+              const option = document.createElement("option");
+              option.value = city.toLowerCase();
+              option.textContent = city.charAt(0).toUpperCase() + city.slice(1);
+              fromSelect.appendChild(option);
+            });
+
+            // Populate "To" cities
+            toCities.forEach((city) => {
+              const option = document.createElement("option");
+              option.value = city.toLowerCase();
+              option.textContent = city.charAt(0).toUpperCase() + city.slice(1);
+              toSelect.appendChild(option);
+            });
+          } else {
+            console.warn("No routes found in API response");
+          }
+        } catch (err) {
+          console.error("Error loading routes:", err);
+        }
+      }
+
+      window.onload = () => {
+        loadRoutes1();
+      };
+    </script>
+  </body>
+</html>

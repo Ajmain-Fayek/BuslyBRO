@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login | BuslyBRO</title>
+    <link rel="stylesheet" href="../css/main.css" />
+    <meta
+      name="description"
+      content="Search and book bus tickets across Bangladesh with BuslyBRO. Compare operators, select seats, and book with confidence using local payment methods."
+    />
+    <script
+      type="module"
+      src="https://static.rocket.new/rocket-web.js?_cfg=https%3A%2F%2Fbuslybro8859back.builtwithrocket.new&_be=https%3A%2F%2Fapplication.rocket.new&_v=0.1.8"
+    ></script>
+  </head>
+  <body class="bg-gray-100 flex items-center justify-center h-screen">
+    <!-- Hero Section -->
+    <section
+      class="relative w-full h-[100vh] bg-gradient-to-br from-primary-800 to-primary-600 overflow-hidden"
+    >
+      <!-- Background Image -->
+      <div class="absolute inset-0">
+        <img
+          src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          alt="Bangladesh Highway Landscape"
+          class="w-full h-full object-cover opacity-20"
+          loading="lazy"
+        />
+      </div>
+
+      <!-- Hero Content -->
+      <div
+        class="relative max-w-xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32"
+      >
+        <!-- Logo -->
+        <div class="flex items-center mb-20 justify-between space-x-6">
+          <div class="flex-shrink-0 bg-white px-1.5 rounded-lg">
+            <button>
+              <svg
+                class="h-10 w-auto"
+                viewBox="0 0 120 40"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <rect
+                  x="0"
+                  y="8"
+                  width="32"
+                  height="24"
+                  rx="4"
+                  fill="#006B5C"
+                />
+                <rect x="4" y="12" width="24" height="4" rx="2" fill="white" />
+                <rect x="4" y="18" width="16" height="4" rx="2" fill="white" />
+                <rect x="4" y="24" width="20" height="4" rx="2" fill="white" />
+                <text
+                  x="40"
+                  y="20"
+                  font-family="Poppins"
+                  font-weight="700"
+                  font-size="16"
+                  fill="#006B5C"
+                >
+                  BuslyBRO
+                </text>
+                <text
+                  x="40"
+                  y="32"
+                  font-family="Inter"
+                  font-size="10"
+                  fill="#5F6368"
+                >
+                  Journey Companion
+                </text>
+              </svg>
+            </button>
+          </div>
+          <div class="text-white font-semibold text-2xl">Login</div>
+        </div>
+        <form id="loginForm" class="space-y-4">
+          <div>
+            <label
+              class="block text-sm font-medium text-gray-200 mb-1"
+              for="email"
+              >Email</label
+            >
+            <input
+              id="email"
+              type="email"
+              placeholder="Enter your email"
+              class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              required
+            />
+          </div>
+
+          <div>
+            <label
+              class="block text-sm font-medium text-gray-200 mb-1"
+              for="password"
+              >Password</label
+            >
+            <input
+              id="password"
+              type="password"
+              placeholder="Enter your password"
+              class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              required
+            />
+          </div>
+
+          <button
+            type="submit"
+            class="w-full bg-green-500 text-white py-2 rounded-lg hover:bg-green-600 transition duration-200"
+          >
+            Log In
+          </button>
+        </form>
+
+        <p id="message" class="text-center text-sm mt-4 text-gray-600"></p>
+
+        <p class="text-center text-sm mt-6">
+          Don't have an account?
+          <a href="register.html" class="text-green-200 hover:underline"
+            >Register</a
+          >
+        </p>
+        <p class="text-center text-sm mt-6">
+          Go back to
+          <a
+            href="homepage_bus_booking_platform.html"
+            class="text-green-200 hover:underline"
+            >Home</a
+          >
+        </p>
+      </div>
+    </section>
+
+    <script>
+      const form = document.getElementById("loginForm");
+      const message = document.getElementById("message");
+
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        message.textContent = "Logging in...";
+        message.className = "text-center text-sm mt-4 text-gray-600";
+
+        const email = document.getElementById("email").value.trim();
+        const password = document.getElementById("password").value.trim();
+
+        try {
+          const res = await fetch("/BuslyBRO/backend/auth/login.php", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            credentials: "include",
+            body: JSON.stringify({ email, password }),
+          });
+
+          const data = await res.json();
+
+          if (res.ok) {
+            // Save user info and token
+            localStorage.setItem("token", data.token);
+            localStorage.setItem("user", JSON.stringify(data.user));
+
+            message.textContent = "Login successful! Redirecting...";
+            message.className = "text-center text-sm mt-4 text-green-600";
+
+            // Redirect based on role
+            setTimeout(() => {
+              if (data.user.role === "admin") {
+                window.location.href = "admin_dashboard.html";
+              } else {
+                window.location.href = "my_journeys_dashboard.html";
+              }
+            }, 1000);
+          } else {
+            message.textContent = data.error || "Login failed.";
+            message.className = "text-center text-sm mt-4 text-red-600";
+          }
+        } catch (err) {
+          message.textContent = "Network error. Please try again.";
+          message.className = "text-center text-sm mt-4 text-red-600";
+        }
+      });
+    </script>
+    <script
+      id="dhws-dataInjector"
+      src="../public/dhws-data-injector.js"
+    ></script>
+  </body>
+</html>

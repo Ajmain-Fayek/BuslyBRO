@@ -1,0 +1,1381 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Journeys Dashboard - BuslyBRO | Your Travel Command Center</title>
+    <link rel="stylesheet" href="../css/main.css" />
+    <meta
+      name="description"
+      content="Manage your bus bookings, track live journeys, and access your travel history with BuslyBRO's comprehensive dashboard."
+    />
+    <script
+      type="module"
+      src="https://static.rocket.new/rocket-web.js?_cfg=https%3A%2F%2Fbuslybro8859back.builtwithrocket.new&_be=https%3A%2F%2Fapplication.rocket.new&_v=0.1.8"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+    <script type="module">
+      import { isLoggedIn, getCurrentUser, logout } from "../public/js/auth.js";
+
+      // ✅ Redirect if not logged in
+      if (!isLoggedIn()) {
+        window.location.href = "login.html";
+      } else {
+        // ✅ Display username
+        const user = getCurrentUser();
+        document.getElementById("username").innerText = user.name;
+
+        // ✅ Update all username elements
+        document.querySelectorAll(".username").forEach((el) => {
+          el.textContent = user.name;
+        });
+
+        // ✅ Update all avatar elements (first letter of name, capitalized)
+        document.querySelectorAll(".user-avatar").forEach((el) => {
+          el.textContent = user.name.charAt(0).toUpperCase();
+        });
+
+        // ✅ Handle logout
+        const logoutBtns = document.querySelectorAll(".logout");
+        if (logoutBtns.length > 0) {
+          logoutBtns.forEach((btn) => {
+            btn.addEventListener("click", async (e) => {
+              e.preventDefault();
+
+              try {
+                const token = localStorage.getItem("token");
+                // Optional: call backend logout endpoint
+                await fetch("/BuslyBRO/backend/auth/logout.php", {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`,
+                  },
+                  credentials: "include",
+                });
+              } catch (err) {
+                console.error("Logout API error:", err);
+              }
+
+              // ✅ Clear local session & redirect
+              logout();
+            });
+          });
+        }
+      }
+    </script>
+  </head>
+  <body class="bg-background font-inter">
+    <!-- Navigation Header -->
+    <nav class="bg-white shadow-subtle sticky top-0 z-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-16">
+          <!-- Logo -->
+          <div class="flex items-center">
+            <div class="flex-shrink-0">
+              <button>
+                <svg
+                  class="h-10 w-auto"
+                  viewBox="0 0 120 40"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <rect
+                    x="0"
+                    y="8"
+                    width="32"
+                    height="24"
+                    rx="4"
+                    fill="#006B5C"
+                  />
+                  <rect
+                    x="4"
+                    y="12"
+                    width="24"
+                    height="4"
+                    rx="2"
+                    fill="white"
+                  />
+                  <rect
+                    x="4"
+                    y="18"
+                    width="16"
+                    height="4"
+                    rx="2"
+                    fill="white"
+                  />
+                  <rect
+                    x="4"
+                    y="24"
+                    width="20"
+                    height="4"
+                    rx="2"
+                    fill="white"
+                  />
+                  <text
+                    x="40"
+                    y="20"
+                    font-family="Poppins"
+                    font-weight="700"
+                    font-size="16"
+                    fill="#006B5C"
+                  >
+                    BuslyBRO
+                  </text>
+                  <text
+                    x="40"
+                    y="32"
+                    font-family="Inter"
+                    font-size="10"
+                    fill="#5F6368"
+                  >
+                    Journey Companion
+                  </text>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- Desktop Navigation -->
+          <div class="hidden md:block">
+            <div class="ml-10 flex items-baseline space-x-8">
+              <a
+                href="homepage_bus_booking_platform.html"
+                class="text-text-secondary hover:text-primary px-3 py-2 rounded-md text-sm transition-smooth"
+                >Home</a
+              >
+              <a
+                href="route_search_booking_flow.html"
+                class="text-text-secondary hover:text-primary px-3 py-2 rounded-md text-sm transition-smooth"
+                >Book Tickets</a
+              >
+              <a
+                href="destinations_cultural_guide.html"
+                class="text-text-secondary hover:text-primary px-3 py-2 rounded-md text-sm transition-smooth"
+                >Destinations</a
+              >
+              <a
+                href="my_journeys_dashboard.html"
+                class="text-primary font-medium px-3 py-2 rounded-md text-sm bg-primary-50"
+                >My Journeys</a
+              >
+              <a
+                href="safety_trust_center.html"
+                class="text-text-secondary hover:text-primary px-3 py-2 rounded-md text-sm transition-smooth"
+                >Safety</a
+              >
+              <a
+                href="ai_travel_assistant_portal.html"
+                class="text-text-secondary hover:text-primary px-3 py-2 rounded-md text-sm transition-smooth"
+                >AI Assistant</a
+              >
+              <button
+                class="text-red-600 hover:text-red-800 bg-red-100 rounded-lg px-3 py-2 text-sm transition-smooth logout"
+              >
+                Log out
+              </button>
+            </div>
+          </div>
+
+          <!-- User Profile & Mobile menu button -->
+          <div class="flex items-center space-x-4">
+            <!-- User Profile (Desktop) -->
+            <div class="hidden md:flex items-center space-x-3">
+              <div
+                class="w-8 h-8 bg-primary rounded-full flex items-center justify-center"
+              >
+                <span
+                  id="user-avatar"
+                  class="text-white text-sm font-medium user-avatar"
+                  >G</span
+                >
+              </div>
+              <span id="username" class="text-text-primary font-medium username"
+                >Guest</span
+              >
+            </div>
+
+            <!-- Mobile menu button -->
+            <div class="md:hidden">
+              <button
+                type="button"
+                class="text-text-secondary hover:text-primary p-2"
+                onclick="toggleMobileMenu()"
+              >
+                <svg
+                  class="h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M4 6h16M4 12h16M4 18h16"
+                  />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile Navigation Menu -->
+      <div
+        id="mobile-menu"
+        class="md:hidden hidden bg-white border-t border-border"
+      >
+        <div class="px-2 pt-2 pb-3 space-y-1">
+          <div class="flex items-center px-3 py-2 mb-2">
+            <div
+              class="w-8 h-8 bg-primary rounded-full flex items-center justify-center mr-3"
+            >
+              <span class="text-white text-sm font-medium user-avatar">G</span>
+            </div>
+            <span class="text-text-primary font-medium username">Guest</span>
+          </div>
+          <a
+            href="homepage_bus_booking_platform.html"
+            class="text-text-secondary hover:text-primary block px-3 py-2 rounded-md text-base"
+            >Home</a
+          >
+          <a
+            href="route_search_booking_flow.html"
+            class="text-text-secondary hover:text-primary block px-3 py-2 rounded-md text-base"
+            >Book Tickets</a
+          >
+          <a
+            href="destinations_cultural_guide.html"
+            class="text-text-secondary hover:text-primary block px-3 py-2 rounded-md text-base"
+            >Destinations</a
+          >
+          <a
+            href="my_journeys_dashboard.html"
+            class="text-primary font-medium block px-3 py-2 rounded-md text-base bg-primary-50"
+            >My Journeys</a
+          >
+          <a
+            href="safety_trust_center.html"
+            class="text-text-secondary hover:text-primary block px-3 py-2 rounded-md text-base"
+            >Safety</a
+          >
+          <a
+            href="ai_travel_assistant_portal.html"
+            class="text-text-secondary hover:text-primary block px-3 py-2 rounded-md text-base"
+            >AI Assistant</a
+          >
+          <button
+            class="text-red-600 hover:text-red-800 bg-red-100 rounded-lg px-3 py-2 text-sm transition-smooth logout"
+          >
+            Log out
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Dashboard Header -->
+    <section class="bg-gradient-to-br from-primary-50 to-accent-50 py-8">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div
+          class="flex flex-col md:flex-row md:items-center md:justify-between"
+        >
+          <div>
+            <h1
+              class="text-3xl md:text-4xl font-poppins font-bold text-text-primary mb-2"
+            >
+              Welcome back, <span class="username">Guest!</span>
+            </h1>
+            <p class="text-lg text-text-secondary">
+              Manage your journeys and discover new destinations
+            </p>
+          </div>
+          <div class="mt-4 md:mt-0">
+            <a
+              href="route_search_booking_flow.html"
+              class="inline-flex items-center bg-secondary text-white px-6 py-3 rounded-cultural font-semibold hover:bg-secondary-600 transition-smooth"
+            >
+              <svg
+                class="w-5 h-5 mr-2"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 4v16m8-8H4"
+                />
+              </svg>
+              Book New Journey
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Dashboard Content -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <!-- Main Content -->
+        <div class="lg:col-span-2 space-y-8">
+          <!-- Active Journeys -->
+          <section class="bg-white rounded-cultural-lg shadow-card p-6">
+            <div class="flex items-center justify-between mb-6">
+              <h2 class="text-2xl font-poppins font-semibold text-text-primary">
+                Upcoming Journeys
+              </h2>
+            </div>
+
+            <!-- Upcoming Journey -->
+            <div id="upcomingJourneys"></div>
+          </section>
+
+          <!-- Journey History -->
+          <section class="bg-white rounded-cultural-lg shadow-card p-6">
+            <div class="flex items-center justify-between mb-6">
+              <h2 class="text-2xl font-poppins font-semibold text-text-primary">
+                Journey History
+              </h2>
+              <button class="text-primary font-medium hover:text-primary-700">
+                View All
+              </button>
+            </div>
+
+            <div id="pastJourneys" class="space-y-4">
+              <!-- History Item 1 -->
+              <div
+                class="border border-border rounded-cultural p-4 hover:shadow-card transition-smooth"
+              >
+                <div class="flex items-start justify-between mb-3">
+                  <div>
+                    <h3 class="font-semibold text-text-primary mb-1">
+                      Dhaka → Sylhet
+                    </h3>
+                    <p class="text-sm text-text-secondary">
+                      Hanif Enterprise • AC Sleeper
+                    </p>
+                  </div>
+                  <div class="text-right">
+                    <p class="text-sm text-text-secondary">Aug 15, 2025</p>
+                    <div class="flex items-center mt-1">
+                      <svg
+                        class="w-4 h-4 text-accent mr-1"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                      >
+                        <path
+                          d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                        />
+                      </svg>
+                      <span class="text-sm text-text-secondary">4.8</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="flex items-center justify-between">
+                  <span class="text-sm text-success font-medium"
+                    >Completed</span
+                  >
+                  <div class="flex space-x-2">
+                    <button
+                      class="text-primary text-sm font-medium hover:text-primary-700"
+                    >
+                      Rebook
+                    </button>
+                    <button
+                      class="text-text-secondary text-sm hover:text-text-primary"
+                    >
+                      Rate Journey
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Family Booking Management -->
+          <section class="bg-white rounded-cultural-lg shadow-card p-6">
+            <div class="flex items-center justify-between mb-6">
+              <h2 class="text-2xl font-poppins font-semibold text-text-primary">
+                Family Bookings
+              </h2>
+              <button class="text-primary font-medium hover:text-primary-700">
+                Manage Family
+              </button>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <!-- Family Member 1 -->
+              <div class="border border-border rounded-cultural p-4">
+                <div class="flex items-center mb-3">
+                  <div
+                    class="w-10 h-10 bg-accent rounded-full flex items-center justify-center mr-3"
+                  >
+                    <span class="text-white font-medium">FR</span>
+                  </div>
+                  <div>
+                    <h3 class="font-semibold text-text-primary">
+                      Fatima Rahman
+                    </h3>
+                    <p class="text-sm text-text-secondary">Wife</p>
+                  </div>
+                </div>
+                <div class="text-sm text-text-secondary">
+                  <p>Next Journey: Dhaka → Cox's Bazar</p>
+                  <p>Date: Aug 25, 2025</p>
+                </div>
+              </div>
+
+              <!-- Family Member 2 -->
+              <div class="border border-border rounded-cultural p-4">
+                <div class="flex items-center mb-3">
+                  <div
+                    class="w-10 h-10 bg-secondary rounded-full flex items-center justify-center mr-3"
+                  >
+                    <span class="text-white font-medium">ZR</span>
+                  </div>
+                  <div>
+                    <h3 class="font-semibold text-text-primary">Zara Rahman</h3>
+                    <p class="text-sm text-text-secondary">Daughter</p>
+                  </div>
+                </div>
+                <div class="text-sm text-text-secondary">
+                  <p>Next Journey: Dhaka → Cox's Bazar</p>
+                  <p>Date: Aug 25, 2025</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-4 p-4 bg-accent-50 rounded-cultural">
+              <div class="flex items-center">
+                <svg
+                  class="w-5 h-5 text-accent mr-2"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+                <span class="text-accent-700 font-medium"
+                  >Family Group Discount: 15% off applied</span
+                >
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="space-y-6">
+          <!-- Loyalty Rewards -->
+          <section class="bg-white rounded-cultural-lg shadow-card p-6">
+            <h2
+              class="text-xl font-poppins font-semibold text-text-primary mb-4"
+            >
+              Loyalty Rewards
+            </h2>
+
+            <div class="text-center mb-4">
+              <div
+                class="w-20 h-20 bg-gradient-to-br from-accent to-accent-600 rounded-full flex items-center justify-center mx-auto mb-3"
+              >
+                <svg
+                  class="w-10 h-10 text-white"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                  />
+                </svg>
+              </div>
+              <h3 class="font-semibold text-text-primary">Gold Member</h3>
+              <p class="text-sm text-text-secondary">Level 3 of 5</p>
+            </div>
+
+            <div class="space-y-3">
+              <div class="flex justify-between items-center">
+                <span class="text-sm text-text-secondary">Travel Credits</span>
+                <span class="font-semibold text-primary">৳1,250</span>
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="text-sm text-text-secondary">Referral Bonus</span>
+                <span class="font-semibold text-secondary">৳500</span>
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="text-sm text-text-secondary"
+                  >Next Tier Progress</span
+                >
+                <span class="font-semibold text-accent">75%</span>
+              </div>
+            </div>
+
+            <div class="mt-4">
+              <div class="w-full bg-gray-200 rounded-full h-2">
+                <div
+                  class="bg-accent h-2 rounded-full"
+                  style="width: 75%"
+                ></div>
+              </div>
+              <p class="text-xs text-text-secondary mt-1">
+                3 more journeys to Platinum
+              </p>
+            </div>
+          </section>
+
+          <!-- Personalized Recommendations -->
+          <section class="bg-white rounded-cultural-lg shadow-card p-6">
+            <h2
+              class="text-xl font-poppins font-semibold text-text-primary mb-4"
+            >
+              Recommended for You
+            </h2>
+
+            <div class="space-y-4">
+              <!-- Recommendation 1 -->
+              <div class="border border-border rounded-cultural p-4">
+                <div
+                  class="relative h-24 mb-3 overflow-hidden rounded-cultural"
+                >
+                  <img
+                    src="https://images.pexels.com/photos/457882/pexels-photo-457882.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                    alt="Cox's Bazar Beach"
+                    class="w-full h-full object-cover"
+                    loading="lazy"
+                    onerror="this.src='https://images.pexels.com/photos/457882/pexels-photo-457882.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'; this.onerror=null;"
+                  />
+                </div>
+                <h3 class="font-semibold text-text-primary mb-1">
+                  Cox's Bazar
+                </h3>
+                <p class="text-sm text-text-secondary mb-2">
+                  Perfect for family vacation
+                </p>
+                <div class="flex justify-between items-center">
+                  <span class="text-sm text-primary font-medium"
+                    >From ৳850</span
+                  >
+                  <button
+                    class="text-xs bg-primary text-white px-3 py-1 rounded-full hover:bg-primary-700"
+                  >
+                    Book Now
+                  </button>
+                </div>
+              </div>
+
+              <!-- Recommendation 2 -->
+              <div class="border border-border rounded-cultural p-4">
+                <div
+                  class="relative h-24 mb-3 overflow-hidden rounded-cultural"
+                >
+                  <img
+                    src="https://cdn.pixabay.com/photo/2018/12/03/17/14/garden-3853777_1280.jpg"
+                    alt="Sylhet Tea Gardens"
+                    class="w-full h-full object-cover"
+                    loading="lazy"
+                    onerror="this.src='https://images.pixabay.com/photo-2017/04/10/11/33/tea-plantation-2218439_1280.jpg'; this.onerror=null;"
+                  />
+                </div>
+                <h3 class="font-semibold text-text-primary mb-1">Bandarban</h3>
+                <p class="text-sm text-text-secondary mb-2">
+                  Hill tracts adventure
+                </p>
+                <div class="flex justify-between items-center">
+                  <span class="text-sm text-primary font-medium"
+                    >From ৳650</span
+                  >
+                  <button
+                    class="text-xs bg-primary text-white px-3 py-1 rounded-full hover:bg-primary-700"
+                  >
+                    Book Now
+                  </button>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Quick Actions -->
+          <section class="bg-white rounded-cultural-lg shadow-card p-6">
+            <h2
+              class="text-xl font-poppins font-semibold text-text-primary mb-4"
+            >
+              Quick Actions
+            </h2>
+
+            <div class="space-y-3">
+              <button
+                class="w-full flex items-center justify-between p-3 bg-surface rounded-cultural hover:bg-gray-200 transition-smooth"
+              >
+                <div class="flex items-center">
+                  <svg
+                    class="w-5 h-5 text-primary mr-3"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
+                    />
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                    />
+                  </svg>
+                  <span class="text-text-primary">Preferences</span>
+                </div>
+                <svg
+                  class="w-4 h-4 text-text-secondary"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M9 5l7 7-7 7"
+                  />
+                </svg>
+              </button>
+
+              <button
+                class="w-full flex items-center justify-between p-3 bg-surface rounded-cultural hover:bg-gray-200 transition-smooth"
+              >
+                <div class="flex items-center">
+                  <svg
+                    class="w-5 h-5 text-primary mr-3"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M15 17h5l-5 5v-5zM4.828 7l2.828 2.828L5.828 12l2.828 2.828L6.828 17H2l2.828-2.828L2 12l2.828-2.828L2 7h4.828zM9 3v18"
+                    />
+                  </svg>
+                  <span class="text-text-primary">Emergency Contacts</span>
+                </div>
+                <svg
+                  class="w-4 h-4 text-text-secondary"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M9 5l7 7-7 7"
+                  />
+                </svg>
+              </button>
+
+              <button
+                class="w-full flex items-center justify-between p-3 bg-surface rounded-cultural hover:bg-gray-200 transition-smooth"
+              >
+                <div class="flex items-center">
+                  <svg
+                    class="w-5 h-5 text-primary mr-3"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                    />
+                  </svg>
+                  <span class="text-text-primary">Wishlist</span>
+                </div>
+                <svg
+                  class="w-4 h-4 text-text-secondary"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M9 5l7 7-7 7"
+                  />
+                </svg>
+              </button>
+            </div>
+          </section>
+
+          <!-- Notifications -->
+          <section class="bg-white rounded-cultural-lg shadow-card p-6">
+            <div class="flex items-center justify-between mb-4">
+              <h2 class="text-xl font-poppins font-semibold text-text-primary">
+                Notifications
+              </h2>
+              <div class="w-2 h-2 bg-secondary rounded-full"></div>
+            </div>
+
+            <div class="space-y-3">
+              <div class="p-3 bg-secondary-50 rounded-cultural">
+                <p class="text-sm font-medium text-text-primary">
+                  Journey Update
+                </p>
+                <p class="text-xs text-text-secondary">
+                  Your bus is on time. ETA: 6:45 AM
+                </p>
+                <p class="text-xs text-text-secondary mt-1">2 minutes ago</p>
+              </div>
+
+              <div class="p-3 bg-accent-50 rounded-cultural">
+                <p class="text-sm font-medium text-text-primary">
+                  Special Offer
+                </p>
+                <p class="text-xs text-text-secondary">
+                  20% off on Cox's Bazar routes this weekend
+                </p>
+                <p class="text-xs text-text-secondary mt-1">1 hour ago</p>
+              </div>
+            </div>
+
+            <button
+              class="w-full mt-4 text-primary text-sm font-medium hover:text-primary-700"
+            >
+              View All Notifications
+            </button>
+          </section>
+        </div>
+      </div>
+    </div>
+
+    <!-- AI Assistant Chat Bubble -->
+    <div class="fixed bottom-6 right-6 z-50">
+      <button
+        class="bg-secondary hover:bg-secondary-600 text-white p-4 rounded-full shadow-primary-lg transition-smooth"
+        onclick="openAIAssistant()"
+      >
+        <svg
+          class="w-6 h-6"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
+          />
+        </svg>
+      </button>
+      <div
+        class="absolute bottom-16 right-0 bg-white rounded-cultural shadow-primary-lg p-3 w-48 hidden"
+        id="ai-tooltip"
+      >
+        <p class="text-sm text-text-primary font-medium">Ask BuslyBRO</p>
+        <p class="text-xs text-text-secondary">বাসলিব্রোকে জিজ্ঞাসা করুন</p>
+      </div>
+    </div>
+
+    <!-- Journey Details Modal -->
+    <div
+      id="journeyDetailsModal"
+      class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50"
+    >
+      <div class="bg-white rounded-2xl w-full max-w-lg p-6 relative shadow-lg">
+        <button
+          id="closeModal"
+          class="absolute top-4 right-4 text-gray-500 hover:text-gray-800 text-lg font-bold"
+        >
+          &times;
+        </button>
+
+        <div id="journeyDetailsContent" class="space-y-6 text-gray-800"></div>
+
+        <div class="flex justify-end mt-6 gap-3">
+          <button
+            id="downloadTicket"
+            class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700"
+          >
+            Download
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-text-primary text-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+          <!-- Company Info -->
+          <div class="col-span-1 md:col-span-2">
+            <div class="flex items-center mb-4">
+              <svg
+                class="h-8 w-auto mr-3"
+                viewBox="0 0 120 40"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <rect x="0" y="8" width="32" height="24" rx="4" fill="white" />
+                <rect
+                  x="4"
+                  y="12"
+                  width="24"
+                  height="4"
+                  rx="2"
+                  fill="#006B5C"
+                />
+                <rect
+                  x="4"
+                  y="18"
+                  width="16"
+                  height="4"
+                  rx="2"
+                  fill="#006B5C"
+                />
+                <rect
+                  x="4"
+                  y="24"
+                  width="20"
+                  height="4"
+                  rx="2"
+                  fill="#006B5C"
+                />
+                <text
+                  x="40"
+                  y="20"
+                  font-family="Poppins"
+                  font-weight="700"
+                  font-size="16"
+                  fill="white"
+                >
+                  BuslyBRO
+                </text>
+                <text
+                  x="40"
+                  y="32"
+                  font-family="Inter"
+                  font-size="10"
+                  fill="#B3E5DF"
+                >
+                  Journey Companion
+                </text>
+              </svg>
+            </div>
+            <p class="text-gray-300 mb-4 max-w-md">
+              Your trusted journey companion for premium bus booking across
+              Bangladesh. Discover destinations with confidence and travel with
+              peace of mind.
+            </p>
+            <div class="flex space-x-4">
+              <a
+                href="javascript:void(0)"
+                class="text-gray-300 hover:text-white transition-smooth"
+              >
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path
+                    d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"
+                  />
+                </svg>
+              </a>
+              <a
+                href="javascript:void(0)"
+                class="text-gray-300 hover:text-white transition-smooth"
+              >
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path
+                    d="M22.46 6c-.77.35-1.6.58-2.46.69.88-.53 1.56-1.37 1.88-2.38-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29 0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15 0 1.49.75 2.81 1.91 3.56-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07 4.28 4.28 0 0 0 4 2.98 8.521 8.521 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21 16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56.84-.6 1.56-1.36 2.14-2.23z"
+                  />
+                </svg>
+              </a>
+              <a
+                href="javascript:void(0)"
+                class="text-gray-300 hover:text-white transition-smooth"
+              >
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path
+                    d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.174-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.402.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.357-.629-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24.009 12.017 24.009c6.624 0 11.99-5.367 11.99-11.988C24.007 5.367 18.641.001.012.001z.017-.001z"
+                  />
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <!-- Quick Links -->
+          <div>
+            <h3 class="text-lg font-poppins font-semibold mb-4">Quick Links</h3>
+            <ul class="space-y-2">
+              <li>
+                <a
+                  href="route_search_booking_flow.html"
+                  class="text-gray-300 hover:text-white transition-smooth"
+                  >Book Tickets</a
+                >
+              </li>
+              <li>
+                <a
+                  href="destinations_cultural_guide.html"
+                  class="text-gray-300 hover:text-white transition-smooth"
+                  >Destinations</a
+                >
+              </li>
+              <li>
+                <a
+                  href="my_journeys_dashboard.html"
+                  class="text-gray-300 hover:text-white transition-smooth"
+                  >My Journeys</a
+                >
+              </li>
+              <li>
+                <a
+                  href="safety_trust_center.html"
+                  class="text-gray-300 hover:text-white transition-smooth"
+                  >Safety Center</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <!-- Support -->
+          <div>
+            <h3 class="text-lg font-poppins font-semibold mb-4">Support</h3>
+            <ul class="space-y-2">
+              <li>
+                <a
+                  href="ai_travel_assistant_portal.html"
+                  class="text-gray-300 hover:text-white transition-smooth"
+                  >AI Assistant</a
+                >
+              </li>
+              <li>
+                <a
+                  href="javascript:void(0)"
+                  class="text-gray-300 hover:text-white transition-smooth"
+                  >Help Center</a
+                >
+              </li>
+              <li>
+                <a
+                  href="javascript:void(0)"
+                  class="text-gray-300 hover:text-white transition-smooth"
+                  >Contact Us</a
+                >
+              </li>
+              <li>
+                <a
+                  href="javascript:void(0)"
+                  class="text-gray-300 hover:text-white transition-smooth"
+                  >Terms & Conditions</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="border-t border-gray-700 mt-8 pt-8 text-center">
+          <p class="text-gray-300">
+            © 2025 BuslyBRO. All Rights Reserved. | Made with ❤️ for Bangladesh
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <script type="module">
+      import { isLoggedIn, getCurrentUser, logout } from "../public/js/auth.js";
+      let buses = [];
+      function toggleMobileMenu() {
+        const mobileMenu = document.getElementById("mobile-menu");
+        mobileMenu.classList.toggle("hidden");
+      }
+
+      function openAIAssistant() {
+        window.location.href = "ai_travel_assistant_portal.html";
+      }
+
+      // Show AI tooltip on hover
+      const aiButton = document.querySelector(".fixed button");
+      const aiTooltip = document.getElementById("ai-tooltip");
+
+      if (aiButton && aiTooltip) {
+        aiButton.addEventListener("mouseenter", () => {
+          aiTooltip.classList.remove("hidden");
+        });
+
+        aiButton.addEventListener("mouseleave", () => {
+          aiTooltip.classList.add("hidden");
+        });
+      }
+
+      // Mock live tracking update
+      function updateLiveTracking() {
+        const progressBar = document.querySelector(".bg-success");
+        if (progressBar) {
+          let currentWidth = 65;
+          setInterval(() => {
+            currentWidth += 0.1;
+            if (currentWidth > 100) currentWidth = 65;
+            progressBar.style.width = currentWidth + "%";
+          }, 30000); // Update every 30 seconds
+        }
+      }
+
+      // Initialize live tracking
+      document.addEventListener("DOMContentLoaded", updateLiveTracking);
+      const user = getCurrentUser();
+      // Upcoming journey
+      async function fetchUpcomingJourneys() {
+        try {
+          const res = await fetch(
+            `http://localhost/BuslyBRO/backend/api/reservations_list.php?userId=${user.id}`
+          );
+          const data = await res.json();
+
+          const container = document.getElementById("upcomingJourneys");
+          container.innerHTML = "";
+
+          if (!data.success) {
+            container.innerHTML =
+              '<p class="text-center text-text-secondary">No upcoming journeys.</p>';
+            return;
+          }
+
+          // ✅ Filter: Only confirmed & future journeys
+          const upcoming = data.upcoming.filter((journey) => {
+            const departureDate = new Date(journey.departure_datetime);
+            return (
+              journey.status === "confirmed" && // only confirmed
+              departureDate > new Date() // future date
+            );
+          });
+
+          if (!upcoming.length) {
+            container.innerHTML =
+              '<p class="text-center text-text-secondary">No upcoming journeys.</p>';
+          } else {
+            buses = upcoming;
+            upcoming.forEach((journey, idx) => {
+              console.log(journey);
+              const departureDate = new Date(journey.departure_datetime);
+              const arrivalDate = new Date(journey.arrival_datetime);
+
+              const journeyCard = document.createElement("div");
+              journeyCard.classList =
+                "border border-border rounded-cultural-lg p-6 space-x-4 space-y-4 mb-4";
+
+              journeyCard.innerHTML = `
+            <div class="flex items-start justify-between mb-4">
+              <div>
+                <h3 class="text-lg font-semibold text-text-primary mb-1">
+                  ${journey.route_from} → ${journey.route_to}
+                </h3>
+                <p class="text-text-secondary">
+                  ${journey.bus_name} • ${journey.bus_type}
+                </p>
+              </div>
+              <span class="bg-warning text-white px-3 py-1 rounded-full text-sm font-medium">
+                ${departureDate.toLocaleDateString("en-US", {
+                  weekday: "long",
+                })}
+              </span>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
+              <div>
+                <p class="text-sm text-text-secondary">Departure</p>
+                <p class="font-semibold text-text-primary">
+                  ${departureDate.toLocaleTimeString([], {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                  })}
+                </p>
+              </div>
+              <div>
+                <p class="text-sm text-text-secondary">Arrival</p>
+                <p class="font-semibold text-text-primary">
+                  ${arrivalDate.toLocaleTimeString([], {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                  })}
+                </p>
+              </div>
+              <div>
+                <p class="text-sm text-text-secondary">Seats</p>
+                <p class="font-semibold text-text-primary">${journey.seats.join(
+                  ", "
+                )}</p>
+              </div>
+              <div>
+                <p class="text-sm text-text-secondary">Booking ID</p>
+                <p class="font-semibold text-text-primary">BLB${journey.bus_id
+                  .toString()
+                  .padStart(9, "0254")}</p>
+              </div>
+            </div>
+
+            <div class="flex flex-col sm:flex-row gap-3 mb-4">
+              <button class="flex-1 bg-blue-600 text-white py-2 px-4 rounded-cultural font-medium hover:bg-blue-700 transition-smooth"
+                onclick="viewJourneyDetails(${idx})">
+                View Details
+              </button>
+              <button
+                class="flex-1 bg-red-600 text-white py-2 px-4 rounded-cultural font-medium hover:bg-red-700 transition-smooth"
+                onclick="cancelTicket(${journey.bus_id}, '${
+                journey.departure_datetime
+              }', this)">
+                Cancel Ticket
+              </button>
+            </div>
+          `;
+
+              container.appendChild(journeyCard);
+            });
+          }
+
+          // ✅ Past journeys include completed & cancelled
+          const pastContainer = document.getElementById("pastJourneys");
+          pastContainer.innerHTML = "";
+
+          const past = data.past.filter(
+            (journey) =>
+              journey.status === "confirmed" ||
+              journey.status === "cancelled" ||
+              new Date(journey.departure_datetime) < new Date()
+          );
+          const upcomingCancelled = data.upcoming.filter(
+            (journey) =>
+              journey.status === "cancelled" &&
+              new Date(journey.departure_datetime) > new Date()
+          );
+          console.log(upcomingCancelled);
+
+          if (!past.length && !upcomingCancelled.length) {
+            pastContainer.innerHTML =
+              '<p class="text-center text-text-secondary">No past journeys.</p>';
+          } else {
+            const groupedPastJourneys = {};
+
+            upcomingCancelled.forEach((journey) => {
+              const key = `${journey.bus_id}_${journey.departure_datetime}`;
+              if (!groupedPastJourneys[key]) {
+                groupedPastJourneys[key] = { ...journey };
+              }
+            });
+
+            past.forEach((journey) => {
+              const key = `${journey.bus_id}_${journey.departure_datetime}`;
+              if (!groupedPastJourneys[key]) {
+                groupedPastJourneys[key] = { ...journey };
+              }
+            });
+
+            Object.values(groupedPastJourneys).forEach((journey) => {
+              const departureDate = new Date(journey.departure_datetime);
+              const arrivalDate = new Date(journey.arrival_datetime);
+
+              const journeyCard = document.createElement("div");
+
+              journeyCard.innerHTML = `
+            <div class="border border-border rounded-cultural p-4 hover:shadow-card transition-smooth mb-4">
+              <div class="flex items-start justify-between mb-3">
+                <div>
+                  <h3 class="font-semibold text-text-primary mb-1">
+                    ${journey.route_from} → ${journey.route_to}
+                  </h3>
+                  <p class="text-sm text-text-secondary">
+                    ${journey.bus_name} • ${journey.bus_type}
+                  </p>
+                </div>
+                <div class="text-right">
+                  <p class="text-sm text-text-secondary">${departureDate.toLocaleDateString(
+                    "en-US"
+                  )}</p>
+                </div>
+              </div>
+
+              <div class="flex items-center justify-between">
+                <span class="text-sm ${
+                  journey.status === "cancelled"
+                    ? "text-red-600"
+                    : "text-success"
+                } font-medium">
+                  ${journey.status === "cancelled" ? "Cancelled" : "Completed"}
+                </span>
+                <div class="flex space-x-2">
+                  <button
+                    class="text-primary text-sm font-medium hover:text-primary-700"
+                    onclick="rebookJourney(${journey.bus_id})">
+                    Rebook
+                  </button>
+                  <button
+                    class="text-text-secondary text-sm hover:text-text-primary"
+                    onclick="rateJourney(${journey.bus_id})">
+                    Rate Journey
+                  </button>
+                </div>
+              </div>
+            </div>
+          `;
+
+              pastContainer.appendChild(journeyCard);
+            });
+          }
+        } catch (error) {
+          console.error("Error fetching journeys:", error);
+        }
+      }
+
+      // View details function (simple example)
+      // Open modal with journey data
+      function viewJourneyDetails(idx) {
+        const journey = buses[idx];
+        const modal = document.getElementById("journeyDetailsModal");
+        const content = document.getElementById("journeyDetailsContent");
+
+        const depTime = new Date(journey.departure_datetime).toLocaleString();
+        const arrTime = new Date(journey.arrival_datetime).toLocaleString();
+
+        content.innerHTML = `
+        <div class="space-y-4">
+          <!-- Route Info -->
+          <div class="text-center">
+            <h3 class="text-2xl font-semibold capitalize text-gray-900">${
+              journey.route_from
+            } → ${journey.route_to}</h3>
+            <p class="text-gray-500 mt-1">${journey.bus_name} • ${
+          journey.bus_type
+        }</p>
+          </div>
+
+          <!-- Journey Timings -->
+          <div class="grid grid-cols-2 gap-4 border border-gray-100 rounded-xl p-4 bg-gray-50">
+            <div>
+              <p class="text-sm text-gray-500">Departure</p>
+              <p class="font-medium">${depTime}</p>
+            </div>
+            <div>
+              <p class="text-sm text-gray-500">Arrival</p>
+              <p class="font-medium">${arrTime}</p>
+            </div>
+          </div>
+
+          <!-- Fare and Seats -->
+          <div class="grid grid-cols-2 gap-4 border border-gray-100 rounded-xl p-4 bg-gray-50">
+            <div>
+              <p class="text-sm text-gray-500">Fare</p>
+              <p class="font-semibold text-blue-700">৳${journey.fare}</p>
+            </div>
+            <div>
+              <p class="text-sm text-gray-500">Seats</p>
+              <p class="font-semibold">${journey.seats.join(", ")}</p>
+            </div>
+          </div>
+
+          <!-- Stops -->
+          <div class="border border-gray-100 rounded-xl p-4 bg-gray-50">
+            <p class="text-sm text-gray-500 mb-2">Stops</p>
+            <div class="flex flex-wrap gap-2">
+              ${journey.stops
+                .map(
+                  (stop, i) =>
+                    `<span class="bg-blue-50 text-blue-700 px-3 py-1 rounded-full text-sm font-medium">${
+                      i + 1
+                    }. ${stop}</span>`
+                )
+                .join("")}
+            </div>
+          </div>
+        </div>
+      `;
+
+        modal.classList.remove("hidden");
+
+        // Download ticket as PDF
+        document.getElementById("downloadTicket").onclick = () => {
+          const content = document.getElementById("journeyDetailsContent");
+
+          // Optional: configure pdf options
+          const opt = {
+            margin: 0.5,
+            filename: `ticket_${journey.bus_number}_${journey.departure_datetime}.pdf`,
+            image: { type: "jpeg", quality: 0.98 },
+            html2canvas: { scale: 2 },
+            jsPDF: { unit: "in", format: "letter", orientation: "portrait" },
+          };
+
+          html2pdf().set(opt).from(content).save();
+        };
+      }
+
+      // Close modal
+      document.getElementById("closeModal").addEventListener("click", () => {
+        document.getElementById("journeyDetailsModal").classList.add("hidden");
+      });
+
+      // Cancel ticket function
+      async function cancelTicket(busId, departureDatetime, buttonEl) {
+        if (
+          !confirm(
+            "Are you sure you want to cancel this ticket? All seats will be cancelled."
+          )
+        ) {
+          return;
+        }
+
+        buttonEl.disabled = true;
+        buttonEl.textContent = "Cancelling...";
+
+        try {
+          const res = await fetch(
+            "http://localhost/BuslyBRO/backend/api/reservations_delete.php",
+            {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                bus_id: busId,
+                departure_datetime: departureDatetime,
+              }),
+            }
+          );
+
+          console.log(res);
+
+          const data = await res.json();
+
+          if (res.ok) {
+            alert(data.message || "Ticket cancelled successfully.");
+            // Refresh journeys after cancellation
+            fetchUpcomingJourneys();
+          } else {
+            alert(data.error || "Failed to cancel ticket.");
+            buttonEl.disabled = false;
+            buttonEl.textContent = "Cancel Ticket";
+          }
+        } catch (err) {
+          console.error(err);
+          alert("Server error. Please try again.");
+          buttonEl.disabled = false;
+          buttonEl.textContent = "Cancel Ticket";
+        }
+      }
+
+      // Load journeys on page load
+      window.addEventListener("DOMContentLoaded", fetchUpcomingJourneys);
+      window.cancelTicket = cancelTicket;
+      window.viewJourneyDetails = viewJourneyDetails;
+    </script>
+    <script
+      id="dhws-dataInjector"
+      src="../public/dhws-data-injector.js"
+    ></script>
+  </body>
+</html>
