@@ -12,9 +12,9 @@
       if (!isLoggedIn()) {
         window.location.href = "login.html";
       } else {
-        // // ✅ Display username
-        // const user = getCurrentUser();
-        // document.getElementById("username").innerText = user.name;
+        // ✅ Display username
+        const user = getCurrentUser();
+        document.getElementById("username").innerText = user.name;
 
         // // ✅ Update all username elements
         // document.querySelectorAll(".username").forEach((el) => {
@@ -56,11 +56,16 @@
       }
     </script>
   </head>
-  <body class="bg-gray-100 min-h-screen">
+  <body class="bg-gray-100 min-h-[100vh]">
     <div class="container mx-auto p-6">
       <!-- Header -->
       <header class="flex justify-between items-center mb-6">
-        <h1 class="text-3xl font-bold text-gray-800">Admin Dashboard</h1>
+        <div>
+          <h1 class="text-3xl font-bold text-gray-800">Admin Dashboard</h1>
+          <p class="text-2xl font-bold text-gray-800">
+            Welcome, <span id="username" class="text-blue-600"></span>
+          </p>
+        </div>
         <button
           class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 logout"
         >
@@ -141,11 +146,9 @@
         <!-- Bus Modal -->
         <div
           id="busModal"
-          class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50"
+          class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50 overflow-scroll py-10"
         >
-          <div
-            class="flex justify-center items-center place-content-center mt-10"
-          >
+          <div class="flex justify-center items-center place-content-center">
             <div class="bg-white rounded-xl p-6 w-full max-w-md relative">
               <!-- Close Button -->
               <button
@@ -721,7 +724,7 @@
 
       async function deleteRoute(id) {
         if (!confirm("Are you sure you want to delete this route?")) return;
-        console.log(id)
+        console.log(id);
 
         try {
           const res = await fetch(
@@ -804,6 +807,9 @@
       window.createBus = createBus;
       window.saveRoute = saveRoute;
     </script>
-  <script id="dhws-dataInjector" src="../public/dhws-data-injector.js"></script>
-</body>
+    <script
+      id="dhws-dataInjector"
+      src="../public/dhws-data-injector.js"
+    ></script>
+  </body>
 </html>

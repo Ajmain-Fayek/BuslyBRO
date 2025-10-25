@@ -1272,7 +1272,7 @@
           <div class="grid grid-cols-2 gap-4 border border-gray-100 rounded-xl p-4 bg-gray-50">
             <div>
               <p class="text-sm text-gray-500">Fare</p>
-              <p class="font-semibold text-blue-700">৳${journey.fare}</p>
+              <p class="font-semibold text-blue-700">৳${journey?.fare * journey?.seats?.length}</p>
             </div>
             <div>
               <p class="text-sm text-gray-500">Seats</p>
